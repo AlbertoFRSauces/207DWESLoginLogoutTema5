@@ -25,6 +25,6 @@ Desarrollo de una aplicación con control de acceso e identificación del usuari
 
 ## Entornos
 ### Desarrollo (local)
-- http://daw207.sauces.local/207DWESLoginLogoutTema5/login.php
+- http://daw207.sauces.local/207DWESLoginLogoutTema5/indexProyectoLoginLogoutTema5.php
 ### Explotación (1&1)
-- http://daw207.ieslossauces.es/207DWESLoginLogoutTema5/login.php
+- http://daw207.ieslossauces.es/207DWESLoginLogoutTema5/indexProyectoLoginLogoutTema5.php
