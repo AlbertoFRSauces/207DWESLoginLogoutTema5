@@ -1,0 +1,185 @@
+/* 
+    Created on : 02/10/2021
+    Author     : Alberto Fernandez Ramirez
+   
+*/
+/*test @import url(//db.onlinewebfonts.com/c/3a47f5f06b5484abfeee9eac90348a9c?family=Gotham);*/
+@font-face {font-family: "Gotham-Medium";
+            src: url("3a47f5f06b5484abfeee9eac90348a9c.eot"); /* IE9*/
+            src: url("3a47f5f06b5484abfeee9eac90348a9c.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+                url("3a47f5f06b5484abfeee9eac90348a9c.woff2") format("woff2"), /* chrome、firefox */
+                url("3a47f5f06b5484abfeee9eac90348a9c.woff") format("woff"), /* chrome、firefox */
+                url("3a47f5f06b5484abfeee9eac90348a9c.ttf") format("truetype"), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+                url("3a47f5f06b5484abfeee9eac90348a9c.svg#Gotham-Medium") format("svg"); /* iOS 4.1- */
+}
+*{
+    box-sizing: border-box;
+    margin: 0px; 
+    padding: 0px;
+}
+body{
+    font-family:calibri, arial, sans-serif;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+    position:relative;
+    background-color:#EEEEEE;
+}
+/* INICIO Titulo*/
+header h1{
+    font-family: "Gotham-Medium";
+    font-size:42px;
+    text-transform:uppercase;
+    text-align: center;
+    color:white;
+    padding-left:15px;
+    padding-top:25px;
+    padding-bottom:25px;
+    padding-right:15px;
+    background-color:#D90000;
+}
+/* FIN Titulo */
+
+/* IMAGENES */
+.imagegithub{
+    margin-right:5px;
+    float: right;
+    width: 43px;
+    height: 43px;
+}
+.imageplay{
+    margin-right: 3px;
+    float: right;
+    width: 40px;
+    height: 40px;
+}
+.imagecodigo{
+    margin-right: 3px;
+    float: right;
+    width: 34px;
+    height: 34px;
+}
+.imageatras{
+    margin-left:5px;
+    float: left;
+    width: 43px;
+    height: 43px;
+}
+.cajaimagen{
+    width: 33px;
+    height: 43px;
+}
+.cajaseparacion{
+    width: 10px;
+    height: 43px;
+}
+.muestraconfig{
+    margin-right: 3px;
+    float: right;
+    width: 40px;
+    height: 40px;
+    opacity: 0;
+}
+/* FIN IMAGENES */
+
+/* INICIO subtitulo */
+.segundot{
+    font-family: "Gotham-Medium";
+    font-size:19px;
+    text-align:center;
+    background-color:#252525;
+    color:white;
+    padding-top:15px;
+    padding-bottom:15px;
+}
+/* FIN subtitulo */
+
+/* INICIO Cuadros sobre las practicas realizadas */
+.tituloPDO{
+    font-family: "Gotham-Medium";
+    font-size:18px;
+    text-align:center;
+    color:#252525;
+    padding-top:15px;
+    padding-bottom:15px;
+    padding-right: 20px;
+}
+.tituloMySQLi{
+    font-family: "Gotham-Medium";
+    font-size:18px;
+    text-align:center;
+    color:#252525;
+    padding-top:15px;
+    padding-bottom:15px;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+.tituloseparacion{
+    font-family: "Gotham-Medium";
+    font-size:23px;
+    text-align:center;
+    color:#252525;
+    padding-top:15px;
+    padding-bottom:15px;
+    padding-right: 4px;
+    padding-left: 4px;
+}
+.tabla{
+    background-color:white;
+    height: auto;
+    width: 900px;
+}
+table{
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+.primerasfilas{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.primerasfilas:last-child{
+    margin-bottom: 75px;
+}
+.titulofoto{
+    font-family: "Gotham-Medium";
+    font-size:21px;
+    text-align: left;
+    background-color:white;
+    color:#212121;
+    padding: 15px;
+
+}
+.titulofoto:hover{
+    font-family: "Gotham-Medium";
+    font-size:21px;
+    text-align:left;
+    background-color:#212121;
+    color:white;
+    padding: 15px;
+}
+.tabla tr a{
+    text-decoration:none;
+}
+/* FIN Cuadros sobre las practicas realizadas */
+
+/* INICIO footer */
+.piepagina{
+    font-family: "Gotham-Medium";
+    font-size: 14px;
+    background-color:#DDDDDD;
+    position: fixed;
+    bottom: 0;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    right: 0px;
+    left: 0px;
+}
+.piepagina p{
+    color:#33333D;
+    text-align:center;
+    margin-left: 31px;
+}
+.piepagina p:first-of-type{
+    margin-top: 6px;
+}
+/* FIN footer */
