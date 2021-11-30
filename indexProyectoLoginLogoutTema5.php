@@ -30,59 +30,17 @@ if (isset($_REQUEST['iniciarsesion'])) {
         <link href="../207DWESLoginLogoutTema5/webroot/css/estilo.css" rel="stylesheet" type="text/css">
         <link rel="icon" href="../207DWESLoginLogoutTema5/webroot/css/img/home.png" type="image/x-icon">
         <title>Index Login y Logout Tema 5</title>
-        <style>
-            .container{
-                position: relative;
-                height: auto;
-                width: 100%;
-            }
-            form{
-                width: 700px;
-                height: auto;
-                margin: auto;
-            }
-            input{
-                width: 225px;
-                font-size: 105%;
-                padding: 12px;
-                text-align: center;
-                background-color: #252525;
-                color: white;
-                text-transform: uppercase;
-                margin-left: 215px;
-                cursor: pointer;
-                font-weight: bold;
-            }
-            input:hover{
-                width: 225px;
-                font-size: 105%;
-                padding: 12px;
-                text-align: center;
-                background-color: white;
-                color: #252525;
-                text-transform: uppercase;
-                margin-left: 215px;
-                cursor: pointer;
-                font-weight: bold;
-            }
-            .iniciarsesion{
-                margin-top: 50px;
-                margin-bottom: 50px;
-            }
-        </style>
     </head>
     <body>
-        <div class="container">
+        <div class="containerIndex">
             <header>
                 <h1>207DWESLoginLogoutTema5</h1>
             </header>
             <article class="segundot">
                 <h2>LoginLogoutTema5 - TEMA 5</h2>
             </article>
-            <form >
+            <form class="formularioIndex">
                 <input type="submit" value="Iniciar sesión" name="iniciarsesion" class="iniciarsesion"/>
-            </form>
-            <form>
                 <input type="submit" value="SALIR" name="salir" class="salir"/>
             </form>
         

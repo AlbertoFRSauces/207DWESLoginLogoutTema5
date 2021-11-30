@@ -2,20 +2,55 @@
 /*
  * @author: Alberto Fernandez Ramirez
  * @since: 29/11/2021
- * @version: 1.0 Realizacion del index
+ * @version: 1.0 Realizacion de programa y el logout
  * @copyright: Copyright (c) 2021, Alberto Fernandez Ramirez
- * Index para entrar al login o salir hacia el index del Tema 5
+ * Programa para ver el nombre del usuario que inicio sesion, sus conexiones y la ultima conexion, dos botones, uno de cerrar sesion y uno de detalle
  */
 
-//Comprobar si se ha pulsado el boton volver
-if (isset($_REQUEST['cerrarsesion'])) {
-    header('Location: ../codigoPHP/login.php');
+session_start(); //Creo una nueva sesion o recupero una existente
+
+if (!isset($_SESSION['usuarioDAW207AppLoginLogout'])) { //Coimprobar si el usuario no se ha autentificado
+        header('Location: ../codigoPHP/login.php'); //Redirijo al usuario al login.php para que se autentifique
+        exit;
+    }
+
+if (isset($_REQUEST['cerrarsesion'])) { //Comprobar si se ha pulsado el boton volver
+    session_destroy(); //Elimino todos los datos que contiene la sesion
+    header('Location: ../codigoPHP/login.php'); //Vuelvo al login
     exit;
 }
-//Comprobar si se ha pulsado el boton entrar
-if (isset($_REQUEST['detalle'])) {
-    header('Location: ../codigoPHP/detalle.php');
+
+if (isset($_REQUEST['detalle'])) {//Comprobar si se ha pulsado el boton detalle
+    header('Location: ../codigoPHP/detalle.php'); //Entro a detalle
     exit;
+}
+
+require_once '../core/libreriaValidacion.php'; //Incluyo la libreria de validacion
+require_once '../config/configDBPDO.php'; //Incluyo las variables de la conexion
+
+try{
+    $DB207DWESProyectoTema5 = new PDO(HOST, USER, PASSWORD); //Hago la conexion con la base de datos
+    $DB207DWESProyectoTema5 -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //Establezco el atributo para la aparicion de errores con ATTR_ERRMODE y le pongo que cuando haya un error se lance una excepcion con ERRMODE_EXCEPTION
+        
+    $consulta = "SELECT T01_DescUsuario, T01_NumConexiones, T01_FechaHoraUltimaConexion FROM T01_Usuario WHERE T01_CodUsuario=:CodUsuario"; //Consulta para actualizar el total de conexiones y la fechahora de la ultima conexion
+    $resultadoConsulta = $DB207DWESProyectoTema5->prepare($consulta); //Preparo la consulta antes de ejecutarla
+    $parametros = [ //guardo en un parametro el usuario obtenido en la sesion del login
+        ":CodUsuario" => $_SESSION['usuarioDAW207AppLoginLogout']
+    ];
+    $resultadoConsulta->execute($parametros);//Ejecuto la consulta con el array de parametros
+    
+    $oUsuario = $resultadoConsulta->fetchObject(); //Obtengo el primer registro de la consulta
+    $nombreUsuario = $oUsuario->T01_DescUsuario; //Guardo en la variable nombreUsuario el nombre del usuario logeado con exito
+    $conexionesUsuario = $oUsuario->T01_NumConexiones; //Guardo en la variable conexionesUsuario el total de conexiones realizadas del usuario logeado con exito
+    $ultimaConexionUsuario = $oUsuario->T01_FechaHoraUltimaConexion; //Guardo en la variable ultimaConexionUsuario la fecha de la ultima conexion del usuario logeado con exito
+    
+}catch(PDOException $excepcion){//Codigo que se ejecuta si hay algun error
+    $errorExcepcion = $excepcion->getCode();//Obtengo el codigo del error y lo almaceno en la variable errorException
+    $mensajeException = $excepcion->getMessage();//Obtengo el mensaje del error y lo almaceno en la variable mensajeException
+    echo "<p style='color: red'>Codigo del error: </p>" . $errorExcepcion;//Muestro el codigo del error
+    echo "<p style='color: red'>Mensaje del error: </p>" . $mensajeException;//Muestro el mensaje del error
+}finally{
+    unset($DB207DWESProyectoTema5);//Cierro la conexion
 }
 ?>
 <!DOCTYPE html>
@@ -33,11 +68,14 @@ if (isset($_REQUEST['detalle'])) {
     </head>
     <body>
         <div class="container">
-            <form>
+            <h1 class="usuario"><?php  echo "Bienvenid@ " . $nombreUsuario ?></h1>
+            <h3 class="conexiones"><?php  echo "Has realizado " . $conexionesUsuario . " conexion/es." ?></h3>
+            <h3 class="ultimaConexion"><?php  echo "Tu ultima conexion fue el " . date('d/m/Y H:i:s',$ultimaConexionUsuario) ?></h3>
+                    
+            <form class="formularioPrograma">
                 <input type="submit" value="CERRAR SESION" name="cerrarsesion" class="cerrarsesion"/>
                 <input type="submit" value="DETALLE" name="detalle" class="detalle"/>
             </form>
-        
             <footer class="piepagina">
                 <a href="../codigoPHP/login.php"><img src="../webroot/css/img/atras.png" class="imageatras" alt="IconoAtras" /></a>
                 <a href="https://github.com/AlbertoFRSauces/207DWESLoginLogoutTema5" target="_blank"><img src="../webroot/css/img/github.png" class="imagegithub" alt="IconoGitHub" /></a>
