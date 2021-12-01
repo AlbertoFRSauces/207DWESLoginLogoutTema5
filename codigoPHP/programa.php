@@ -32,7 +32,7 @@ try{
     $DB207DWESProyectoTema5 = new PDO(HOST, USER, PASSWORD); //Hago la conexion con la base de datos
     $DB207DWESProyectoTema5 -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //Establezco el atributo para la aparicion de errores con ATTR_ERRMODE y le pongo que cuando haya un error se lance una excepcion con ERRMODE_EXCEPTION
         
-    $consulta = "SELECT T01_DescUsuario, T01_NumConexiones FROM T01_Usuario WHERE T01_CodUsuario=:CodUsuario"; //Consulta para actualizar el total de conexiones y la fechahora de la ultima conexion
+    $consulta = "SELECT T01_DescUsuario, T01_NumConexiones FROM T01_Usuario WHERE T01_CodUsuario=:CodUsuario"; //Consulta para seleccionar la descripcion del usuario y el numero total de conexiones
     $resultadoConsulta = $DB207DWESProyectoTema5->prepare($consulta); //Preparo la consulta antes de ejecutarla
     $parametros = [ //guardo en un parametro el usuario obtenido en la sesion del login
         ":CodUsuario" => $_SESSION['usuarioDAW207AppLoginLogout']
@@ -69,12 +69,13 @@ try{
     </head>
     <body>
         <div class="container">
-            <?php 
+            <?php //Si el usuario nunca se ha conectado muestro el siguiente mensaje
             if($conexionesUsuario <= 1){?>
                 <h1 class="usuario"><?php  echo "Bienvenid@ " . $nombreUsuario ?></h1>
                 <h3 class="conexiones"><?php  echo "Esta es la primera vez que te conectas!" ?></h3>
             <?php
             }else{
+                //Si el usuario se ha conectado mas veces muestro el siguiente mensaje
             ?>
                 <h1 class="usuario"><?php  echo "Bienvenid@ " . $nombreUsuario ?></h1>
                 <h3 class="conexiones"><?php  echo "Es la " . $conexionesUsuario . " vez que te conectas." ?></h3>

@@ -9,6 +9,11 @@
 
 session_start(); //Creo una nueva sesion o recupero una existente
 
+if (!isset($_SESSION['usuarioDAW207AppLoginLogout'])) { //Comprobar si el usuario no se ha autentificado
+    header('Location: ../codigoPHP/login.php'); //Redirijo al usuario al login.php para que se autentifique
+    exit;
+}
+
 //Comprobar si se ha pulsado el boton iniciar sesion
 if (isset($_REQUEST['volver'])) {
     header('Location: ../codigoPHP/programa.php');
@@ -27,13 +32,10 @@ if (isset($_REQUEST['volver'])) {
         <link href="../webroot/css/estiloejercicio.css" rel="stylesheet" type="text/css">
         <link rel="icon" href="../webroot/css/img/home.png" type="image/x-icon">
         <title>Detalle Tema 5</title>
-        <style>
-            
-        </style>
     </head>
     <body>
         <div class="container">
-            <form >
+            <form class="buttonback">
                 <input type="submit" value="Volver" name="volver" class="volver"/>
             </form>
             <!–– Muestra del contenido de la variable $_SESSION con foreach()––>
@@ -93,7 +95,7 @@ if (isset($_REQUEST['volver'])) {
                 <a href="../codigoPHP/programa.php"><img src="../webroot/css/img/atras.png" class="imageatras" alt="IconoAtras" /></a>
                 <a href="https://github.com/AlbertoFRSauces/207DWESLoginLogoutTema5" target="_blank"><img src="../webroot/css/img/github.png" class="imagegithub" alt="IconoGitHub" /></a>
                 <p><a>&copy;</a>Alberto Fernández Ramírez 29/09/2021 Todos los derechos reservados.</p>
-                <p>Ultima actualización: 01/12/2021 9:29</p>
+                <p>Ultima actualización: 01/12/2021 20:06</p>
             </footer>
         </div>
     </body>
