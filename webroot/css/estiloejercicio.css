@@ -173,3 +173,33 @@ body{
 .ultimaConexion{
     text-align: center;
 }
+
+/*CONTENIDO DEL DETALLE.PHP CON DOS BOTONES*/
+.cajas{
+    background-color: #9999cc;
+}
+.tablavariable{
+    margin: 0 auto;
+}
+h2{
+    text-align: center;
+}
+.volver{
+    width: 225px;
+    font-size: 105%;
+    padding: 12px;
+    text-align: center;
+    background-color: #252525;
+    color: white;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-weight: bold;
+}
+.volver:hover{
+    background-color: white;
+    color: #252525;
+}
+td{
+    border: 1px solid black;
+    margin: 0;
+}

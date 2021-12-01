@@ -32,7 +32,7 @@ try{
     $DB207DWESProyectoTema5 = new PDO(HOST, USER, PASSWORD); //Hago la conexion con la base de datos
     $DB207DWESProyectoTema5 -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //Establezco el atributo para la aparicion de errores con ATTR_ERRMODE y le pongo que cuando haya un error se lance una excepcion con ERRMODE_EXCEPTION
         
-    $consulta = "SELECT T01_DescUsuario, T01_NumConexiones, T01_FechaHoraUltimaConexion FROM T01_Usuario WHERE T01_CodUsuario=:CodUsuario"; //Consulta para actualizar el total de conexiones y la fechahora de la ultima conexion
+    $consulta = "SELECT T01_DescUsuario, T01_NumConexiones FROM T01_Usuario WHERE T01_CodUsuario=:CodUsuario"; //Consulta para actualizar el total de conexiones y la fechahora de la ultima conexion
     $resultadoConsulta = $DB207DWESProyectoTema5->prepare($consulta); //Preparo la consulta antes de ejecutarla
     $parametros = [ //guardo en un parametro el usuario obtenido en la sesion del login
         ":CodUsuario" => $_SESSION['usuarioDAW207AppLoginLogout']
@@ -42,7 +42,8 @@ try{
     $oUsuario = $resultadoConsulta->fetchObject(); //Obtengo el primer registro de la consulta
     $nombreUsuario = $oUsuario->T01_DescUsuario; //Guardo en la variable nombreUsuario el nombre del usuario logeado con exito
     $conexionesUsuario = $oUsuario->T01_NumConexiones; //Guardo en la variable conexionesUsuario el total de conexiones realizadas del usuario logeado con exito
-    $ultimaConexionUsuario = $oUsuario->T01_FechaHoraUltimaConexion; //Guardo en la variable ultimaConexionUsuario la fecha de la ultima conexion del usuario logeado con exito
+    
+    $ultimaConexionUsuario = $_SESSION['fechaHoraUltimaConexionDAW207AppLoginLogout']; //Guardo en la variable ultimaConexionUsuario la fecha de la ultima conexion del usuario logeado con exito
     
 }catch(PDOException $excepcion){//Codigo que se ejecuta si hay algun error
     $errorExcepcion = $excepcion->getCode();//Obtengo el codigo del error y lo almaceno en la variable errorException
@@ -68,10 +69,19 @@ try{
     </head>
     <body>
         <div class="container">
-            <h1 class="usuario"><?php  echo "Bienvenid@ " . $nombreUsuario ?></h1>
-            <h3 class="conexiones"><?php  echo "Has realizado " . $conexionesUsuario . " conexion/es." ?></h3>
-            <h3 class="ultimaConexion"><?php  echo "Tu ultima conexion fue el " . date('d/m/Y H:i:s',$ultimaConexionUsuario) ?></h3>
-                    
+            <?php 
+            if($conexionesUsuario <= 1){?>
+                <h1 class="usuario"><?php  echo "Bienvenid@ " . $nombreUsuario ?></h1>
+                <h3 class="conexiones"><?php  echo "Esta es la primera vez que te conectas!" ?></h3>
+            <?php
+            }else{
+            ?>
+                <h1 class="usuario"><?php  echo "Bienvenid@ " . $nombreUsuario ?></h1>
+                <h3 class="conexiones"><?php  echo "Es la " . $conexionesUsuario . " vez que te conectas." ?></h3>
+                <h3 class="ultimaConexion"><?php  echo "Tu ultima conexion fue el " . date('d/m/Y H:i:s',$ultimaConexionUsuario) ?></h3>
+            <?php
+            }
+            ?>    
             <form class="formularioPrograma">
                 <input type="submit" value="CERRAR SESION" name="cerrarsesion" class="cerrarsesion"/>
                 <input type="submit" value="DETALLE" name="detalle" class="detalle"/>

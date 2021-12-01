@@ -12,8 +12,6 @@ if (isset($_REQUEST['volver'])) { //Si se ha pulsado vuelvo a el index de la web
     exit;
 }
 
-session_start(); //Creo una nueva sesion o recupero una existente
-
 require_once '../core/libreriaValidacion.php'; //Incluyo la libreria de validacion
 require_once '../config/configDBPDO.php'; //Incluyo las variables de la conexion
 
@@ -96,8 +94,9 @@ if($entradaOK){ //Si la entrada es correcta
         ];
         $resultadoConsultaUpdate->execute($aParametros3);//Ejecuto la consulta con el array de parametros
         
+        session_start(); //Creo una nueva sesion o recupero una existente
         $_SESSION['usuarioDAW207AppLoginLogout'] = $_REQUEST['CodUsuario']; //Almaceno el usuario en $_SESSION
-        $_SESSION['fechaDAW207AppLoginLogout'] = $ultimaConexion; //Almaceno la ultima conexion en $SESSION
+        $_SESSION['fechaHoraUltimaConexionDAW207AppLoginLogout'] = $ultimaConexion; //Almaceno la ultima conexion en $SESSION
 
         header('Location: programa.php'); //Mando a el usuario a la pagina programa.php
         exit;
