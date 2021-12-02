@@ -183,3 +183,92 @@ table{
     margin-top: 6px;
 }
 /* FIN footer */
+
+/* Index ProyectoLoginLogout */
+.containerIndex{
+    position: relative;
+    height: auto;
+    width: 100%;
+}
+.formularioIndex{
+    width: 700px;
+    height: auto;
+    margin: auto;
+}
+.iniciarsesion{
+    width: 225px;
+    font-size: 105%;
+    padding: 12px;
+    text-align: center;
+    background-color: #252525;
+    color: white;
+    text-transform: uppercase;
+    margin-left: 215px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.iniciarsesion:hover{
+    width: 225px;
+    font-size: 105%;
+    padding: 12px;
+    text-align: center;
+    background-color: white;
+    color: #252525;
+    text-transform: uppercase;
+    margin-left: 215px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.salir{
+    width: 225px;
+    font-size: 105%;
+    padding: 12px;
+    text-align: center;
+    background-color: #252525;
+    color: white;
+    text-transform: uppercase;
+    margin-left: 215px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.iniciarsesion:hover{
+    width: 225px;
+    font-size: 105%;
+    padding: 12px;
+    text-align: center;
+    background-color: white;
+    color: #252525;
+    text-transform: uppercase;
+    margin-left: 215px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.iniciarsesion{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.formularioIdioma{
+    display: flex;
+    justify-content: flex-end;
+}
+button{
+    border: 0;
+    width: 50px;
+    height: 35px;
+    margin: 5px;
+}
+.es{
+    width: 50px;
+    height: 35px;
+    cursor: pointer;
+}
+.en{
+    width: 50px;
+    height: 35px;
+    cursor: pointer;
+}
+.pt{
+    width: 50px;
+    height: 35px;
+    cursor: pointer;
+}

@@ -21,6 +21,7 @@ body{
     font-family:calibri, arial, sans-serif;
     background-repeat:no-repeat;
     background-color:#EEEEEE;
+    padding-bottom: 50px;
 }
 /* IMAGENES */
 .imagegithub{
@@ -72,133 +73,6 @@ body{
     margin-top: 6px;
 }
 
-
-
-/*CONTENIDO DEL FORMULARIO PAGINA PRINCIPAL Y BOTONES MTODEPARTAMENTOS*/
-form{
-    margin-top: 15px;
-    margin-bottom: 70px;
-}
-fieldset{
-    border: 2px solid black;
-    width: 750px;
-    height: 700px;
-    margin: auto;
-}
-ul{
-    list-style: none;
-}
-ul li{
-    padding-left: 15px;
-    padding-bottom: 15px;
-    padding-right: 15px;
-}
-span{
-    font-size: 90%;
-    color: red;
-}
-.enviar{
-    width: 200px;
-    height: 25px;
-    background-color: #252525;
-    margin: 5px;
-    text-align: center;
-    color: white;
-    text-transform: uppercase;
-    cursor: pointer;
-}
-.enviar:hover{
-    width: 200px;
-    height: 25px;
-    background-color: white;
-    margin: 5px;
-    text-align: center;
-    color: #252525;
-    text-transform: uppercase;
-    cursor: pointer;
-}
-.botones{
-    width: 140px;
-    height: 30px;
-    background-color: #252525;
-    text-align: center;
-    color: white;
-    text-transform: uppercase;
-    margin-left: 5px;
-}
-.volver{
-    position: absolute;
-    right: 0;
-    bottom: 55px;
-    margin: 25px;
-    width: 200px;
-    font-size: 100%;
-    padding: 5px;
-    text-align: center;
-    background-color: #252525;
-    color: white;
-    text-transform: uppercase;
-    cursor: pointer;
-}
-.volver:hover{
-    position: absolute;
-    right: 0;
-    bottom: 55px;
-    margin: 25px;
-    width: 200px;
-    font-size: 100%;
-    padding: 5px;
-    text-align: center;
-    background-color: white;
-    color: #252525;
-    text-transform: uppercase;
-    cursor: pointer;
-}
-div input{
-    width: 310px;
-    height: 25px;
-}
-fieldset p:first-child{
-    font-size: 190%;
-    padding-top: 15px;
-    padding-left: 15px;
-    padding-bottom: 15px;
-}
-table{
-    border-collapse: collapse;
-    position: absolute;
-    top: 140px;
-    left: 50%;
-    margin-left: -360px;
-
-}
-th{
-    border: 1px solid black;
-
-}
-td{
-    border: 1px solid black;
-}
-table td{
-
-    width: 150px;
-    text-align: center;
-}
-.conexionRealizada{
-    color: green;
-}
-.botonestabla{
-    width: 40px;
-    cursor: pointer;
-}
-.imagenboton{
-    width: 40px;
-    padding: 5px;
-
-}
-
-
-
 /*CONTENIDO DEL FORMULARIO EDITAR Y BOTONES ACEPTAR Y CANCELAR*/
 .formularioeditar{
     margin-top: 15px;
@@ -239,4 +113,102 @@ table td{
 .botoncancelar:hover{
     background-color: white;
     color: #ff1b22;
+}
+
+/*CONTENIDO DEL PROGRAMA.PHP CON DOS BOTONES*/
+.cerrarsesion{
+    width: 225px;
+    font-size: 105%;
+    padding: 12px;
+    text-align: center;
+    background-color: #252525;
+    color: white;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-weight: bold;
+}
+.cerrarsesion:hover{
+    background-color: white;
+    color: #252525;
+}
+.detalle{
+    width: 225px;
+    font-size: 105%;
+    padding: 12px;
+    text-align: center;
+    background-color: #252525;
+    color: white;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-weight: bold;
+}
+.detalle:hover{
+    background-color: white;
+    color: #252525;
+}
+.container{
+    position: relative;
+    height: auto;
+    width: 100%;
+}
+.formularioPrograma{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.cerrarsesion{
+    margin: 10px;
+}
+.detalle{
+    margin: 10px;
+}
+
+.usuario{
+    text-align: center;
+}
+.conexiones{
+    text-align: center;
+}
+.ultimaConexion{
+    text-align: center;
+}
+
+/*CONTENIDO DEL DETALLE.PHP CON DOS BOTONES*/
+.cajas{
+    background-color: #9999cc;
+    border: 1px solid black;
+}
+.tablavariable{
+    margin: 0 auto;
+    padding: 0;
+    border-collapse: collapse;
+}
+h2{
+    text-align: center;
+}
+.volver{
+    width: 150px;
+    font-size: 105%;
+    padding: 10px;
+    text-align: center;
+    background-color: #252525;
+    color: white;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-weight: bold;
+}
+.volver:hover{
+    background-color: white;
+    color: #252525;
+}
+.buttonback{
+    display: flex;
+    flex-direction: row;
+    justify-content:flex-end;
+    padding: 5px;
+}
+td{
+    border: 1px solid black;
+    margin: 0;
 }

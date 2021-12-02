@@ -17,6 +17,35 @@ if (isset($_REQUEST['iniciarsesion'])) {
     header('Location: ../207DWESLoginLogoutTema5/codigoPHP/login.php');
     exit;
 }
+//
+if (!isset($_COOKIE['idioma'])){
+    setcookie("idioma", "es", time()+2000002); //Pongo el idioma en español y el tiempo de expiracion en +2000002
+    header('Location: ../207DWESLoginLogoutTema5/indexProyectoLoginLogoutTema5.php'); 
+    exit;
+}
+//
+if(isset($_REQUEST['idiomaBotonSeleccionado'])){
+    setcookie("idioma", $_REQUEST['idiomaBotonSeleccionado'], time()+2000002);//Ponemos que el idioma sea el seleccionado en el boton
+}
+
+$aIdioma['es'] = [ //Array de los datos en español
+    'bienvenido' => 'Bienvenid@'
+];
+
+$aIdioma['en'] = [ //Array de los datos en ingles
+   'bienvenido' => 'Welcome'
+];
+
+$aIdioma['pt'] = [ //Array de los datos en ingles
+   'bienvenido' => 'Receber'
+];
+
+//$aIdiomas = array(
+//    'es' => array('bienvenido' => "Bienvenid@"),
+//    'en' => array('bienvenido' => "Welcome"),
+//    'pt' => array('bienvenido' => 'Receber')
+//);
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -30,62 +59,24 @@ if (isset($_REQUEST['iniciarsesion'])) {
         <link href="../207DWESLoginLogoutTema5/webroot/css/estilo.css" rel="stylesheet" type="text/css">
         <link rel="icon" href="../207DWESLoginLogoutTema5/webroot/css/img/home.png" type="image/x-icon">
         <title>Index Login y Logout Tema 5</title>
-        <style>
-            .container{
-                position: relative;
-                height: auto;
-                width: 100%;
-            }
-            form{
-                width: 700px;
-                height: auto;
-                margin: auto;
-            }
-            input{
-                width: 225px;
-                font-size: 105%;
-                padding: 12px;
-                text-align: center;
-                background-color: #252525;
-                color: white;
-                text-transform: uppercase;
-                margin-left: 215px;
-                cursor: pointer;
-                font-weight: bold;
-            }
-            input:hover{
-                width: 225px;
-                font-size: 105%;
-                padding: 12px;
-                text-align: center;
-                background-color: white;
-                color: #252525;
-                text-transform: uppercase;
-                margin-left: 215px;
-                cursor: pointer;
-                font-weight: bold;
-            }
-            .iniciarsesion{
-                margin-top: 50px;
-                margin-bottom: 50px;
-            }
-        </style>
     </head>
     <body>
-        <div class="container">
+        <div class="containerIndex">
             <header>
                 <h1>207DWESLoginLogoutTema5</h1>
             </header>
             <article class="segundot">
                 <h2>LoginLogoutTema5 - TEMA 5</h2>
             </article>
-            <form >
-                <input type="submit" value="Iniciar sesión" name="iniciarsesion" class="iniciarsesion"/>
+            <form class="formularioIdioma">
+                <button type="submit" value="es" name="idiomaBotonSeleccionado" class="idiomaBoton"><img src="../207DWESLoginLogoutTema5/webroot/css/img/es.png" class="es" alt="imagenes"></button>
+                <button type="submit" value="en" name="idiomaBotonSeleccionado" class="idiomaBoton"><img src="../207DWESLoginLogoutTema5/webroot/css/img/en.png" class="en" alt="imagenen"></button>
+                <button type="submit" value="pt" name="idiomaBotonSeleccionado" class="idiomaBoton"><img src="../207DWESLoginLogoutTema5/webroot/css/img/pt.png" class="pt" alt="imagenpt"></button>
             </form>
-            <form>
+            <form class="formularioIndex">
+                <input type="submit" value="Iniciar sesión" name="iniciarsesion" class="iniciarsesion"/>
                 <input type="submit" value="SALIR" name="salir" class="salir"/>
             </form>
-        
             <footer class="piepagina">
                 <a href="../207DWESProyectoTema5/indexProyectoTema5.php"><img src="../207DWESLoginLogoutTema5/webroot/css/img/atras.png" class="imageatras" alt="IconoAtras" /></a>
                 <a href="https://github.com/AlbertoFRSauces/207DWESLoginLogoutTema5" target="_blank"><img src="../207DWESLoginLogoutTema5/webroot/css/img/github.png" class="imagegithub" alt="IconoGitHub" /></a>
