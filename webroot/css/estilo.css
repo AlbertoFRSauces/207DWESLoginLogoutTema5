@@ -247,3 +247,28 @@ table{
     margin-top: 50px;
     margin-bottom: 50px;
 }
+.formularioIdioma{
+    display: flex;
+    justify-content: flex-end;
+}
+button{
+    border: 0;
+    width: 50px;
+    height: 35px;
+    margin: 5px;
+}
+.es{
+    width: 50px;
+    height: 35px;
+    cursor: pointer;
+}
+.en{
+    width: 50px;
+    height: 35px;
+    cursor: pointer;
+}
+.pt{
+    width: 50px;
+    height: 35px;
+    cursor: pointer;
+}

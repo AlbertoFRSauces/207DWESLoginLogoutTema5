@@ -89,7 +89,7 @@ if($entradaOK){ //Si la entrada es correcta
         
         session_start(); //Creo una nueva sesion o recupero una existente
         $_SESSION['usuarioDAW207AppLoginLogout'] = $_REQUEST['CodUsuario']; //Almaceno el usuario en $_SESSION
-        $_SESSION['fechaHoraUltimaConexionDAW207AppLoginLogout'] = $ultimaConexion; //Almaceno la ultima conexion en $_SESSION
+        $_SESSION['fechaHoraUltimaConexionAnteriorDAW207AppLoginLogout'] = $ultimaConexion; //Almaceno la ultima conexion en $_SESSION
 
         header('Location: programa.php'); //Mando al usuario a la pagina programa.php
         exit;
