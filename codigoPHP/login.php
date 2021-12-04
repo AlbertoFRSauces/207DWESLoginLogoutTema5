@@ -37,7 +37,7 @@ if (isset($_REQUEST['entrar'])) { //Si le ha dado al boton de enviar valido los 
             $DB207DWESProyectoTema5 = new PDO(HOST, USER, PASSWORD);//Hago la conexion con la base de datos
             $DB207DWESProyectoTema5 -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);// Establezco el atributo para la aparicion de errores con ATTR_ERRMODE y le pongo que cuando haya un error se lance una excepcion con ERRMODE_EXCEPTION
 
-            $consulta = "SELECT T01_NumConexiones, T01_FechaHoraUltimaConexion, T01_Password FROM T01_Usuario WHERE T01_CodUsuario=:CodUsuario AND T01_Password=:Password"; //Creo la consulta y le paso el usuario a la consulta
+            $consulta = "SELECT T01_NumConexiones, T01_FechaHoraUltimaConexion FROM T01_Usuario WHERE T01_CodUsuario=:CodUsuario AND T01_Password=:Password"; //Creo la consulta y le paso el usuario a la consulta
             $resultadoConsulta=$DB207DWESProyectoTema5->prepare($consulta); // Preparo la consulta antes de ejecutarla
             $aParametros1 = [
                 ":CodUsuario" => $_REQUEST['CodUsuario'],
@@ -45,6 +45,10 @@ if (isset($_REQUEST['entrar'])) { //Si le ha dado al boton de enviar valido los 
             ];
             $resultadoConsulta->execute($aParametros1);//Ejecuto la consulta con el array de parametros
             $oUsuario = $resultadoConsulta->fetchObject(); //Obtengo un objeto con el usuario y su password
+            
+            if($resultadoConsulta->rowCount() == 0){ //Si la consulta no tiene ningun registro es que no esta bien el usuario o la password
+                $aErrores['Password'] = "Error en el login."; //Si no es correcto, almaceno el error en el array de errores
+            }
             
             if (!$oUsuario) { //Si la consulta no devuelve ningun resultado, el usuario no existe o la password no coincide con el usuario introducido
                 $entradaOK = false; //Le doy el valor false a la entrada
@@ -232,8 +236,8 @@ if($entradaOK){ //Si la entrada es correcta
             <footer class="piepagina">
                 <a href="../indexProyectoLoginLogoutTema5.php"><img src="../webroot/css/img/atras.png" class="imageatras" alt="IconoAtras" /></a>
                 <a href="https://github.com/AlbertoFRSauces/207DWESLoginLogoutTema5" target="_blank"><img src="../webroot/css/img/github.png" class="imagegithub" alt="IconoGitHub" /></a>
-                <p><a>&copy;</a>Alberto Fernández Ramírez 29/09/2021 Todos los derechos reservados.</p>
-                <p>Ultima actualización: 29/11/2021 22:55</p>
+                <p><a>&copy;</a><a href="http://daw207.ieslossauces.es/index.php">Alberto Fernández Ramírez</a> 29/09/2021 Todos los derechos reservados.</p>
+                <p>Ultima actualización: 04/12/2021 20:33 - Release 1.2</p>
             </footer>
         </div>
     </body>

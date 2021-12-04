@@ -5,7 +5,7 @@ Desarrollo de una aplicación con control de acceso e identificación del usuari
 
 **Fecha Inicio Proyecto: 24/11/2021**
 
-**Ultima Actualización: 03/12/2021**
+**Ultima Actualización: 04/12/2021**
 
 ## Descripción 
 Desarrollo de una aplicación con control de acceso e identificación del usuario.

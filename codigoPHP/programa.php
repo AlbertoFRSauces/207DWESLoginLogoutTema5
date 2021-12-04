@@ -16,7 +16,7 @@ if (!isset($_SESSION['usuarioDAW207AppLoginLogout'])) { //Coimprobar si el usuar
 
 if (isset($_REQUEST['cerrarsesion'])) { //Comprobar si se ha pulsado el boton volver
     session_destroy(); //Elimino todos los datos que contiene la sesion
-    header('Location: ../codigoPHP/login.php'); //Vuelvo al login
+    header('Location: ../indexProyectoLoginLogoutTema5.php'); //Vuelvo al login
     exit;
 }
 
@@ -102,8 +102,8 @@ try{
             <footer class="piepagina">
                 <a href="../codigoPHP/login.php"><img src="../webroot/css/img/atras.png" class="imageatras" alt="IconoAtras" /></a>
                 <a href="https://github.com/AlbertoFRSauces/207DWESLoginLogoutTema5" target="_blank"><img src="../webroot/css/img/github.png" class="imagegithub" alt="IconoGitHub" /></a>
-                <p><a>&copy;</a>Alberto Fernández Ramírez 29/09/2021 Todos los derechos reservados.</p>
-                <p>Ultima actualización: 25/11/2021 19:00</p>
+                <p><a>&copy;</a><a href="http://daw207.ieslossauces.es/index.php">Alberto Fernández Ramírez</a> 29/09/2021 Todos los derechos reservados.</p>
+                <p>Ultima actualización: 04/12/2021 20:40 - Release 1.2</p>
             </footer>
         </div>
     </body>
