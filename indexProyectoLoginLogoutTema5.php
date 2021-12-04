@@ -9,7 +9,7 @@
 
 //Comprobar si se ha pulsado el boton salir
 if (isset($_REQUEST['salir'])) {
-    header('Location: ../207DWESProyectoTema5/indexProyectoTema5.php');
+    header('Location: ../proyectoDWES/indexProyectoDWES.php');
     exit;
 }
 //Comprobar si se ha pulsado el boton iniciar sesion
@@ -78,10 +78,10 @@ $aIdioma['pt'] = [ //Array de los datos en ingles
                 <input type="submit" value="SALIR" name="salir" class="salir"/>
             </form>
             <footer class="piepagina">
-                <a href="../207DWESProyectoTema5/indexProyectoTema5.php"><img src="../207DWESLoginLogoutTema5/webroot/css/img/atras.png" class="imageatras" alt="IconoAtras" /></a>
+                <a href="../proyectoDWES/indexProyectoDWES.php"><img src="../207DWESLoginLogoutTema5/webroot/css/img/atras.png" class="imageatras" alt="IconoAtras" /></a>
                 <a href="https://github.com/AlbertoFRSauces/207DWESLoginLogoutTema5" target="_blank"><img src="../207DWESLoginLogoutTema5/webroot/css/img/github.png" class="imagegithub" alt="IconoGitHub" /></a>
                 <p><a>&copy;</a><a href="http://daw207.ieslossauces.es/index.php">Alberto Fernández Ramírez</a> 29/09/2021 Todos los derechos reservados.</p>
-                <p>Ultima actualización: 03/12/2021 13:09 - Release v1.1</p>
+                <p>Ultima actualización: 04/12/2021 20:36 - Release 1.2</p>
             </footer>
         </div>
     </body>
