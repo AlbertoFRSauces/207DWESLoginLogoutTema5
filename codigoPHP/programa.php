@@ -10,9 +10,9 @@
 session_start(); //Creo una nueva sesion o recupero una existente
 
 if (!isset($_SESSION['usuarioDAW207AppLoginLogout'])) { //Coimprobar si el usuario no se ha autentificado
-        header('Location: ../codigoPHP/login.php'); //Redirijo al usuario al login.php para que se autentifique
-        exit;
-    }
+    header('Location: ../codigoPHP/login.php'); //Redirijo al usuario al login.php para que se autentifique
+    exit;
+}
 
 if (isset($_REQUEST['cerrarsesion'])) { //Comprobar si se ha pulsado el boton volver
     session_destroy(); //Elimino todos los datos que contiene la sesion
@@ -20,7 +20,12 @@ if (isset($_REQUEST['cerrarsesion'])) { //Comprobar si se ha pulsado el boton vo
     exit;
 }
 
-if (isset($_REQUEST['detalle'])) {//Comprobar si se ha pulsado el boton detalle
+if (isset($_REQUEST['editarperfil'])) { //Comprobar si se ha pulsado el boton editarperfil
+    header('Location: ../codigoPHP/editarPerfil.php'); //Entro a editar perfil
+    exit;
+}
+
+if (isset($_REQUEST['detalle'])) { //Comprobar si se ha pulsado el boton detalle
     header('Location: ../codigoPHP/detalle.php'); //Entro a detalle
     exit;
 }
@@ -34,7 +39,7 @@ $aIdioma['en'] = [ //Array de los datos en ingles
 ];
 
 $aIdioma['pt'] = [ //Array de los datos en ingles
-   'bienvenido' => 'Receber'
+   'bienvenido' => 'Bem-vindo'
 ];
 
 require_once '../core/libreriaValidacion.php'; //Incluyo la libreria de validacion
@@ -97,6 +102,7 @@ try{
             ?>    
             <form class="formularioPrograma">
                 <input type="submit" value="CERRAR SESION" name="cerrarsesion" class="cerrarsesion"/>
+                <input type="submit" value="EDITAR PERFIL" name="editarperfil" class="editarperfil"/>
                 <input type="submit" value="DETALLE" name="detalle" class="detalle"/>
             </form>
             <footer class="piepagina">

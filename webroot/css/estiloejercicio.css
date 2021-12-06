@@ -196,7 +196,6 @@ h2{
     color: white;
     text-transform: uppercase;
     cursor: pointer;
-    font-weight: bold;
 }
 .volver:hover{
     background-color: white;
@@ -211,4 +210,96 @@ h2{
 td{
     border: 1px solid black;
     margin: 0;
+}
+
+/*CONTENIDO DEL LOGIN.PHP CON DOS BOTONES*/
+#CodUsuario{
+    width: 251px;
+}
+#Password{
+    width: 239px;
+}
+.entrar{
+    width: 128px;
+    font-size: 100%;
+    padding: 5px;
+    margin: 3px;
+    text-align: center;
+    background-color: #252525;
+    color: white;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.entrar:hover{
+    background-color: white;
+    color: #252525;
+}
+.volver{
+    width: 128px;
+    font-size: 100%;
+    padding: 5px;
+    margin: 3px;
+    text-align: center;
+    background-color: #252525;
+    color: white;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.volver:hover{
+    background-color: white;
+    color: #252525;
+}
+.registrarse{
+    width: 128px;
+    font-size: 100%;
+    padding: 5px;
+    margin: 3px;
+    text-align: center;
+    background-color: #252525;
+    color: white;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.registrarse:hover{
+    background-color: white;
+    color: #252525;
+}
+
+/*CONTENIDO DEL REGISTRO.PHP CON DOS BOTONES*/
+
+.crear{
+    width: 128px;
+    font-size: 100%;
+    padding: 5px;
+    margin: 3px;
+    text-align: center;
+    background-color: #252525;
+    color: white;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.crear:hover{
+    background-color: white;
+    color: #252525;
+}
+.cancelar{
+    width: 128px;
+    font-size: 100%;
+    padding: 5px;
+    margin: 3px;
+    text-align: center;
+    background-color: #252525;
+    color: white;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.cancelar:hover{
+    background-color: white;
+    color: #252525;
+}
+#DescUsuario{
+    width: 225px;
+}
+#RepetirPassword{
+    width: 187px;
 }

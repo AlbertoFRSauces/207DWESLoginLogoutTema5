@@ -37,7 +37,7 @@ $aIdioma['en'] = [ //Array de los datos en ingles
 ];
 
 $aIdioma['pt'] = [ //Array de los datos en ingles
-   'bienvenido' => 'Receber'
+   'bienvenido' => 'Bem-vindo'
 ];
 
 //$aIdiomas = array(
