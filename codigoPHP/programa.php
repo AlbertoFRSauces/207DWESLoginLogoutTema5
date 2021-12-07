@@ -2,17 +2,17 @@
 /*
  * @author: Alberto Fernandez Ramirez
  * @since: 29/11/2021
- * @version: 1.0 Realizacion de programa y el logout
+ * @version: 1.0 Realizacion de programa
  * @copyright: Copyright (c) 2021, Alberto Fernandez Ramirez
- * Programa para ver el nombre del usuario que inicio sesion, sus conexiones y la ultima conexion, dos botones, uno de cerrar sesion y uno de detalle
+ * Programa para ver el nombre del usuario que inicio sesion, sus conexiones y la ultima conexion, tres botones, uno de cerrar sesion, otro de editar perfil y uno de detalle
  */
 
 session_start(); //Creo una nueva sesion o recupero una existente
 
 if (!isset($_SESSION['usuarioDAW207AppLoginLogout'])) { //Coimprobar si el usuario no se ha autentificado
-        header('Location: ../codigoPHP/login.php'); //Redirijo al usuario al login.php para que se autentifique
-        exit;
-    }
+    header('Location: ../codigoPHP/login.php'); //Redirijo al usuario al login.php para que se autentifique
+    exit;
+}
 
 if (isset($_REQUEST['cerrarsesion'])) { //Comprobar si se ha pulsado el boton volver
     session_destroy(); //Elimino todos los datos que contiene la sesion
@@ -20,7 +20,12 @@ if (isset($_REQUEST['cerrarsesion'])) { //Comprobar si se ha pulsado el boton vo
     exit;
 }
 
-if (isset($_REQUEST['detalle'])) {//Comprobar si se ha pulsado el boton detalle
+if (isset($_REQUEST['editarperfil'])) { //Comprobar si se ha pulsado el boton editarperfil
+    header('Location: ../codigoPHP/editarPerfil.php'); //Entro a editar perfil
+    exit;
+}
+
+if (isset($_REQUEST['detalle'])) { //Comprobar si se ha pulsado el boton detalle
     header('Location: ../codigoPHP/detalle.php'); //Entro a detalle
     exit;
 }
@@ -34,7 +39,7 @@ $aIdioma['en'] = [ //Array de los datos en ingles
 ];
 
 $aIdioma['pt'] = [ //Array de los datos en ingles
-   'bienvenido' => 'Receber'
+   'bienvenido' => 'Bem-vindo'
 ];
 
 require_once '../core/libreriaValidacion.php'; //Incluyo la libreria de validacion
@@ -97,13 +102,14 @@ try{
             ?>    
             <form class="formularioPrograma">
                 <input type="submit" value="CERRAR SESION" name="cerrarsesion" class="cerrarsesion"/>
+                <input type="submit" value="EDITAR PERFIL" name="editarperfil" class="editarperfil"/>
                 <input type="submit" value="DETALLE" name="detalle" class="detalle"/>
             </form>
             <footer class="piepagina">
                 <a href="../codigoPHP/login.php"><img src="../webroot/css/img/atras.png" class="imageatras" alt="IconoAtras" /></a>
                 <a href="https://github.com/AlbertoFRSauces/207DWESLoginLogoutTema5" target="_blank"><img src="../webroot/css/img/github.png" class="imagegithub" alt="IconoGitHub" /></a>
                 <p><a>&copy;</a><a href="http://daw207.ieslossauces.es/index.php">Alberto Fernández Ramírez</a> 29/09/2021 Todos los derechos reservados.</p>
-                <p>Ultima actualización: 04/12/2021 20:40 - Release 1.2</p>
+                <p>Ultima actualización: 06/12/2021 17:40 - Release 2.0</p>
             </footer>
         </div>
     </body>

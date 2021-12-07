@@ -1,19 +1,14 @@
 <?php
 /*
  * @author: Alberto Fernandez Ramirez
- * @since: 29/11/2021
- * @version: 1.0 Realizacion del login
+ * @since: 06/12/2021
+ * @version: 1.0 Realizacion del registro
  * @copyright: Copyright (c) 2021, Alberto Fernandez Ramirez
- * Pagina para iniciar sesion
+ * Pagina para registrar un nuevo usuario
  */
 //Comprobar si se ha pulsado el boton volver
-if (isset($_REQUEST['volver'])) { //Si se ha pulsado vuelvo a el index de la web
-    header('Location: ../indexProyectoLoginLogoutTema5.php'); //Redireccion a el index mediante el header
-    exit;
-}
-
-if (isset($_REQUEST['registrarse'])) { //Si se ha pulsado entro en registrarme
-    header('Location: registro.php'); //Redireccion a registro mediante el header
+if (isset($_REQUEST['cancelar'])) { //Si se ha pulsado vuelvo a el index de la web
+    header('Location: login.php'); //Redireccion a el index mediante el header
     exit;
 }
 
@@ -25,38 +20,42 @@ $entradaOK = true;//Variable de entrada correcta inicializada a true
             
 $aErrores = [ //Creo el array de errores y lo inicializo a null
     'CodUsuario' => null,
-    'Password' => null
+    'Password' => null,
+    'DescUsuario' => null,
+    'RepetirPassword' => null
 ];
             
 $aRespuestas = [ //Creo el array de respuestas y lo incializo a null
     'CodUsuario' => null,
-    'Password' => null
+    'Password' => null,
+    'DescUsuario' => null,
+    'RepetirPassword' => null
 ];
 
 //Comprobar si se ha pulsado el boton entrar
-if (isset($_REQUEST['entrar'])) { //Si le ha dado al boton de enviar valido los datos
-    $aErrores['CodUsuario'] = validacionFormularios::comprobarAlfabetico($_REQUEST['CodUsuario'], 200, 1, OBLIGATORIO); //Compruebo si el nombre de usuario esta bien rellenado
+if (isset($_REQUEST['crear'])) { //Si le ha dado al boton de enviar valido los datos
+    $aErrores['CodUsuario'] = validacionFormularios::comprobarAlfabetico($_REQUEST['CodUsuario'], 10, 1, OBLIGATORIO); //Compruebo si el nombre de usuario esta bien rellenado
+    $aErrores['DescUsuario'] = validacionFormularios::comprobarAlfabetico($_REQUEST['DescUsuario'], 255, 1, OBLIGATORIO); //Compruebo si la descripcion del usuario esta bien rellenada
     $aErrores['Password'] = validacionFormularios::validarPassword($_REQUEST['Password'], 8, 1, 1, OBLIGATORIO); //Compruebo si la password esta bien rellenada
-    if ($aErrores['CodUsuario'] == null || $aErrores['Password'] == null){ //Compruebo que el codUsuario y la Password tienen el formato correcto si el array de errores tiene null
+    $aErrores['RepetirPassword'] = validacionFormularios::validarPassword($_REQUEST['RepetirPassword'], 8, 1, 1, OBLIGATORIO); //Compruebo si la password repetida esta bien rellenada
+    if ($aErrores['CodUsuario'] == null || $aErrores['DescUsuario'] == null || $aErrores['Password'] || $aErrores['RepetirPassword']){ //Compruebo que el codUsuario, descUsuario, password y la Password repetida tienen el formato correcto si el array de errores tiene null
         try {
             $DB207DWESProyectoTema5 = new PDO(HOST, USER, PASSWORD);//Hago la conexion con la base de datos
             $DB207DWESProyectoTema5 -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);// Establezco el atributo para la aparicion de errores con ATTR_ERRMODE y le pongo que cuando haya un error se lance una excepcion con ERRMODE_EXCEPTION
 
-            $consulta = "SELECT T01_NumConexiones, T01_FechaHoraUltimaConexion FROM T01_Usuario WHERE T01_CodUsuario=:CodUsuario AND T01_Password=:Password"; //Creo la consulta y le paso el usuario a la consulta
+            $consulta = "SELECT * FROM T01_Usuario WHERE T01_CodUsuario=:CodUsuario"; //Creo la consulta y le paso el usuario a la consulta
             $resultadoConsulta=$DB207DWESProyectoTema5->prepare($consulta); // Preparo la consulta antes de ejecutarla
             $aParametros1 = [
-                ":CodUsuario" => $_REQUEST['CodUsuario'],
-                ":Password" => hash("sha256", ($_REQUEST['CodUsuario'].$_REQUEST['Password']))
+                ":CodUsuario" => $_REQUEST['CodUsuario']
             ];
             $resultadoConsulta->execute($aParametros1);//Ejecuto la consulta con el array de parametros
-            $oUsuario = $resultadoConsulta->fetchObject(); //Obtengo un objeto con el usuario y su password
+            $oUsuario = $resultadoConsulta->fetchObject(); //Obtengo un objeto con el usuario
             
-            if($resultadoConsulta->rowCount() == 0){ //Si la consulta no tiene ningun registro es que no esta bien el usuario o la password
-                $aErrores['Password'] = "Error en el login."; //Si no es correcto, almaceno el error en el array de errores
+            if($resultadoConsulta->rowCount() > 0){ //Si la consulta es mayor que 0, el usuario ya existe en la DB
+                $aErrores['CodUsuaro'] = "El usuario ya existe."; //Si el usuario ya existe, almaceno el error en el array de errores de CodUsuaro
             }
-            
-            if (!$oUsuario) { //Si la consulta no devuelve ningun resultado, el usuario no existe o la password no coincide con el usuario introducido
-                $entradaOK = false; //Le doy el valor false a la entrada
+            if($aErrores['Password'] != $aErrores['RepetirPassword']){ //Compruebo si la password es distinta que la password repetida
+                $aErrores['RepetirPassword'] = "Las passwords no coinciden."; //Si las passwords no son iguales, almaceno el error en el array de errores de RepetirPsasword
             }
         }catch(PDOException $excepcion){//Codigo que se ejecuta si hay algun error
             $errorExcepcion = $excepcion->getCode();//Obtengo el codigo del error y lo almaceno en la variable errorException
@@ -83,22 +82,29 @@ if($entradaOK){ //Si la entrada es correcta
         $DB207DWESProyectoTema5 = new PDO(HOST, USER, PASSWORD);//Hago la conexion con la base de datos
         $DB207DWESProyectoTema5 -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);// Establezco el atributo para la aparicion de errores con ATTR_ERRMODE y le pongo que cuando haya un error se lance una excepcion con ERRMODE_EXCEPTION
         
-        $numeroConexiones = $oUsuario->T01_NumConexiones; //Guardo el numero de conexiones que tiene la base de datos en una variable
-        $ultimaConexion = $oUsuario->T01_FechaHoraUltimaConexion; //Guardo la fechahora de la ultima conexion que tiene la base de datos en una variable
+        $consultaInsert = "INSERT INTO T01_Usuario (T01_CodUsuario, T01_Password, T01_DescUsuario) VALUES (:CodUsuario, :Password, :DescUsuario)";
+        $resultadoConsultaInsert = $DB207DWESProyectoTema5->prepare($consultaInsert); // Preparo la consulta antes de ejecutarla
+        $aParametrosInsert = [ //Array de parametros para el insert
+            ":CodUsuario" => $_REQUEST['CodUsuario'], //El usuario pasado en el formulario
+            ":Password" => hash("sha256", ($_REQUEST['CodUsuario'].$_REQUEST['Password'])), //La password pasada en el formulario
+            ":DescUsuario" => $_REQUEST['DescUsuario']
+        ];
+        $resultadoConsultaInsert->execute($aParametrosInsert);//Ejecuto la consulta con el array de parametros para meter el usuario nuevo a la DB
         
         $consultaUpdate = "UPDATE T01_Usuario SET T01_NumConexiones=:NumConexiones, T01_FechaHoraUltimaConexion=:FechaHoraUltimaConexion WHERE T01_CodUsuario=:CodUsuario"; //Consulta para actualizar el total de conexiones y la fechahora de la ultima conexion
         $resultadoConsultaUpdate = $DB207DWESProyectoTema5->prepare($consultaUpdate); // Preparo la consulta antes de ejecutarla
         
-        $aParametros2 = [ //Array de parametros para el update
-            ":NumConexiones" => ($numeroConexiones+1), //Le sumo al total de conexiones una mas para contar la actual
+        $aParametrosUpdate = [ //Array de parametros para el update
+            ":NumConexiones" => (1), //Le asigno la primera conexion
             ":FechaHoraUltimaConexion" => time(), //Asigno hora local actual con una marca temporal usando time()
-            ":CodUsuario" => $_REQUEST['CodUsuario'] //El usuario pasado en el formulario
+            ":CodUsuario" => $_REQUEST['CodUsuario'] //El usuario nuevo pasado en el formulario
         ];
-        $resultadoConsultaUpdate->execute($aParametros2);//Ejecuto la consulta con el array de parametros
+        $resultadoConsultaUpdate->execute($aParametrosUpdate);//Ejecuto la consulta con el array de parametros
+        
         
         session_start(); //Creo una nueva sesion o recupero una existente
         $_SESSION['usuarioDAW207AppLoginLogout'] = $_REQUEST['CodUsuario']; //Almaceno el usuario en $_SESSION
-        $_SESSION['fechaHoraUltimaConexionAnteriorDAW207AppLoginLogout'] = $ultimaConexion; //Almaceno la ultima conexion en $_SESSION
+        $_SESSION['fechaHoraUltimaConexionAnteriorDAW207AppLoginLogout'] = null; //Almaceno la ultima conexion en $_SESSION, en este caso es null ya que es un usuario nuevo
 
         header('Location: programa.php'); //Mando al usuario a la pagina programa.php
         exit;
@@ -119,11 +125,11 @@ if($entradaOK){ //Si la entrada es correcta
         <meta name="author" content="Alberto Fernandez Ramirez">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="robots" content="index, follow">
-        <meta name="application-name" content="Login y logout">
-        <meta name="description" content="Control de acceso e identificación de un usuario">
+        <meta name="application-name" content="New user">
+        <meta name="description" content="Registro de un nuevo usuario">
         <link href="../webroot/css/estiloejercicio.css" rel="stylesheet" type="text/css">
         <link rel="icon" href="../webroot/css/img/home.png" type="image/x-icon">
-        <title>Login Tema 5</title>
+        <title>Registro Tema 5</title>
         <style>
             form{
                 margin-top: 15px;
@@ -148,7 +154,7 @@ if($entradaOK){ //Si la entrada es correcta
                 align-items: center;
             }
             .titulo{
-               margin-left: 44px; 
+               margin-left: 13px; 
             }
             span{
                 font-size: 90%;
@@ -161,10 +167,7 @@ if($entradaOK){ //Si la entrada es correcta
                 padding-bottom: 15px;
             }
             .errores{
-                height: 15px;
-            }
-            body{
-                background: url("https://www.mascotahogar.com/1920x1080/dibujo-de-un-gato-como-wallpaper.jpg") no-repeat center center fixed;
+                height: 14px;
             }
         </style>
     </head>
@@ -172,7 +175,7 @@ if($entradaOK){ //Si la entrada es correcta
         <div class="container">
             <form name="formulario" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" class="form">
                     <fieldset>
-                        <p class="titulo">Iniciar sesión<p>
+                        <p class="titulo">Registro nuevo usuario<p>
                         <ul>
                             <!--Campo Usuario OBLIGATORIO -->
                             <li>
@@ -182,6 +185,16 @@ if($entradaOK){ //Si la entrada es correcta
                                     echo isset($_REQUEST['CodUsuario']) ? $_REQUEST['CodUsuario'] : null; ?>" 
                                     placeholder="Introduzca el nombre de usuario">
                                     <?php echo '<p class="errores"><span>' . $aErrores['CodUsuario'] . '</span></p>' ?>
+                                </div>
+                            </li>
+                            <!--Campo Descripcion OBLIGATORIO-->
+                            <li>
+                                <div>
+                                    <label for="DescUsuario"><strong>Descripcion*</strong></label>
+                                    <input name="DescUsuario" id="DescUsuario" type="text" value="<?php 
+                                    echo isset($_REQUEST['DescUsuario']) ? $_REQUEST['DescUsuario'] : null; ?>" 
+                                    placeholder="Introduzca la descripcion">
+                                    <?php echo '<p class="errores"><span>' . $aErrores['DescUsuario'] . '</span></p>' ?>
                                 </div>
                             </li>
                             <!--Campo Password OBLIGATORIO-->
@@ -194,11 +207,21 @@ if($entradaOK){ //Si la entrada es correcta
                                     <?php echo '<p class="errores"><span>' . $aErrores['Password'] . '</span></p>' ?>
                                 </div>
                             </li>
-                            <!--Campo Botones Entrar y Volver y registrarse-->
+                           <!--Campo Password Repetir OBLIGATORIO-->
                             <li>
-                                <input type="submit" value="ENTRAR" name="entrar" class="entrar"/>
-                                <input type="submit" value="VOLVER" name="volver" class="volver"/>
-                                <input type="submit" value="registrarse" name="registrarse" class="registrarse"/>
+                                <div>
+                                    <label for="RepetirPassword"><strong>Repetir Password*</strong></label>
+                                    <input name="RepetirPassword" id="RepetirPassword" type="password" value="<?php 
+                                    echo isset($_REQUEST['RepetirPassword']) ? $_REQUEST['RepetirPassword'] : null; ?>" 
+                                    placeholder="Introduzca la password de nuevo">
+                                    <?php echo '<p class="errores"><span>' . $aErrores['RepetirPassword'] . '</span></p>' ?>
+                                </div>
+                            </li>
+                            
+                            <!--Campo Botones Crear y Cancelar-->
+                            <li>
+                                <input type="submit" value="CREAR" name="crear" class="crear"/>
+                                <input type="submit" value="CANCELAR" name="cancelar" class="cancelar"/>
                             </li>
                         </ul>
                     </fieldset>
@@ -210,10 +233,9 @@ if($entradaOK){ //Si la entrada es correcta
                 <a href="../indexProyectoLoginLogoutTema5.php"><img src="../webroot/css/img/atras.png" class="imageatras" alt="IconoAtras" /></a>
                 <a href="https://github.com/AlbertoFRSauces/207DWESLoginLogoutTema5" target="_blank"><img src="../webroot/css/img/github.png" class="imagegithub" alt="IconoGitHub" /></a>
                 <p><a>&copy;</a><a href="http://daw207.ieslossauces.es/index.php">Alberto Fernández Ramírez</a> 29/09/2021 Todos los derechos reservados.</p>
-                <p>Ultima actualización: 04/12/2021 20:33 - Release 2.0</p>
+                <p>Ultima actualización: 06/12/2021 19:33 - Release 2.0</p>
             </footer>
         </div>
     </body>
 </html>
-
 

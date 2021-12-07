@@ -131,6 +131,21 @@ body{
     background-color: white;
     color: #252525;
 }
+.editarperfil{
+    width: 225px;
+    font-size: 105%;
+    padding: 12px;
+    text-align: center;
+    background-color: #252525;
+    color: white;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-weight: bold;
+}
+.editarperfil:hover{
+    background-color: white;
+    color: #252525;
+}
 .detalle{
     width: 225px;
     font-size: 105%;
@@ -196,7 +211,6 @@ h2{
     color: white;
     text-transform: uppercase;
     cursor: pointer;
-    font-weight: bold;
 }
 .volver:hover{
     background-color: white;
@@ -211,4 +225,170 @@ h2{
 td{
     border: 1px solid black;
     margin: 0;
+}
+
+/*CONTENIDO DEL LOGIN.PHP CON DOS BOTONES*/
+#CodUsuario{
+    width: 251px;
+}
+#Password{
+    width: 239px;
+}
+.entrar{
+    width: 128px;
+    font-size: 100%;
+    padding: 5px;
+    margin: 3px;
+    text-align: center;
+    background-color: #252525;
+    color: white;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.entrar:hover{
+    background-color: white;
+    color: #252525;
+}
+.volver{
+    width: 128px;
+    font-size: 100%;
+    padding: 5px;
+    margin: 3px;
+    text-align: center;
+    background-color: #252525;
+    color: white;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.volver:hover{
+    background-color: white;
+    color: #252525;
+}
+.registrarse{
+    width: 128px;
+    font-size: 100%;
+    padding: 5px;
+    margin: 3px;
+    text-align: center;
+    background-color: #252525;
+    color: white;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.registrarse:hover{
+    background-color: white;
+    color: #252525;
+}
+
+/*CONTENIDO DEL REGISTRO.PHP CON DOS BOTONES*/
+
+.crear{
+    width: 128px;
+    font-size: 100%;
+    padding: 5px;
+    margin: 3px;
+    text-align: center;
+    background-color: #252525;
+    color: white;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.crear:hover{
+    background-color: white;
+    color: #252525;
+}
+.cancelar{
+    width: 128px;
+    font-size: 100%;
+    padding: 5px;
+    margin: 3px;
+    text-align: center;
+    background-color: #252525;
+    color: white;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.cancelar:hover{
+    background-color: white;
+    color: #252525;
+}
+#DescUsuario{
+    width: 225px;
+}
+#RepetirPassword{
+    width: 187px;
+}
+
+/*CONTENIDO DEL EDITARPERFIL.PHP CON CUATRO BOTONES*/
+.cambiarpassword{
+    width: 315px;
+    font-size: 90%;
+    padding: 4px;
+    margin: 3px;
+    text-align: center;
+    background-color: #252525;
+    color: white;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.cambiarpassword:hover{
+    background-color: white;
+    color: #252525;
+}
+.aceptar{
+    width: 115px;
+    font-size: 100%;
+    padding: 5px;
+    margin: 3px;
+    text-align: center;
+    background-color: #252525;
+    color: white;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.aceptar:hover{
+    background-color: white;
+    color: #252525;
+}
+.cancelarperfil{
+    width: 115px;
+    font-size: 100%;
+    padding: 5px;
+    margin: 3px;
+    text-align: center;
+    background-color: #252525;
+    color: white;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.cancelarperfil:hover{
+    background-color: white;
+    color: #252525;
+}
+.eliminarcuenta{
+    width: 150px;
+    font-size: 100%;
+    padding: 5px;
+    margin: 3px;
+    text-align: center;
+    background-color: red;
+    color: white;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.eliminarcuenta:hover{
+    background-color: white;
+    color: #252525;
+}
+
+/*CONTENIDO DEL CAMBIARPASSWORD.PHP CON DOS BOTONES*/
+
+#PasswordActual{
+    width: 251px;
+}
+#PasswordNueva{
+    width: 251px;
+}
+#RepetirPasswordNueva{
+    width: 199px;
 }
