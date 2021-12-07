@@ -2,7 +2,7 @@
 /*
  * @author: Alberto Fernandez Ramirez
  * @since: 30/11/2021
- * @version: 1.0 Realizacion del index
+ * @version: 1.0 Realizacion del detalle
  * @copyright: Copyright (c) 2021, Alberto Fernandez Ramirez
  * Pagina de detalle para mostrar las variables $_session $_cookie $_server
  */
@@ -95,7 +95,7 @@ if (isset($_REQUEST['volver'])) {
                 <a href="../codigoPHP/programa.php"><img src="../webroot/css/img/atras.png" class="imageatras" alt="IconoAtras" /></a>
                 <a href="https://github.com/AlbertoFRSauces/207DWESLoginLogoutTema5" target="_blank"><img src="../webroot/css/img/github.png" class="imagegithub" alt="IconoGitHub" /></a>
                 <p><a>&copy;</a><a href="http://daw207.ieslossauces.es/index.php">Alberto Fernández Ramírez</a> 29/09/2021 Todos los derechos reservados.</p>
-                <p>Ultima actualización: 01/12/2021 20:06 - Release 1.2</p>
+                <p>Ultima actualización: 01/12/2021 20:06 - Release 2.0</p>
             </footer>
         </div>
     </body>

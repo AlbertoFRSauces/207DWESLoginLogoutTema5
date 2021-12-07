@@ -2,9 +2,9 @@
 /*
  * @author: Alberto Fernandez Ramirez
  * @since: 29/11/2021
- * @version: 1.0 Realizacion de programa y el logout
+ * @version: 1.0 Realizacion de programa
  * @copyright: Copyright (c) 2021, Alberto Fernandez Ramirez
- * Programa para ver el nombre del usuario que inicio sesion, sus conexiones y la ultima conexion, dos botones, uno de cerrar sesion y uno de detalle
+ * Programa para ver el nombre del usuario que inicio sesion, sus conexiones y la ultima conexion, tres botones, uno de cerrar sesion, otro de editar perfil y uno de detalle
  */
 
 session_start(); //Creo una nueva sesion o recupero una existente
@@ -109,7 +109,7 @@ try{
                 <a href="../codigoPHP/login.php"><img src="../webroot/css/img/atras.png" class="imageatras" alt="IconoAtras" /></a>
                 <a href="https://github.com/AlbertoFRSauces/207DWESLoginLogoutTema5" target="_blank"><img src="../webroot/css/img/github.png" class="imagegithub" alt="IconoGitHub" /></a>
                 <p><a>&copy;</a><a href="http://daw207.ieslossauces.es/index.php">Alberto Fernández Ramírez</a> 29/09/2021 Todos los derechos reservados.</p>
-                <p>Ultima actualización: 04/12/2021 20:40 - Release 1.2</p>
+                <p>Ultima actualización: 06/12/2021 17:40 - Release 2.0</p>
             </footer>
         </div>
     </body>

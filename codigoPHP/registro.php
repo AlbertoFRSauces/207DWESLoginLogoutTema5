@@ -1,10 +1,10 @@
 <?php
 /*
  * @author: Alberto Fernandez Ramirez
- * @since: 29/11/2021
- * @version: 1.0 Realizacion del login
+ * @since: 06/12/2021
+ * @version: 1.0 Realizacion del registro
  * @copyright: Copyright (c) 2021, Alberto Fernandez Ramirez
- * Pagina para iniciar sesion
+ * Pagina para registrar un nuevo usuario
  */
 //Comprobar si se ha pulsado el boton volver
 if (isset($_REQUEST['cancelar'])) { //Si se ha pulsado vuelvo a el index de la web
@@ -125,11 +125,11 @@ if($entradaOK){ //Si la entrada es correcta
         <meta name="author" content="Alberto Fernandez Ramirez">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="robots" content="index, follow">
-        <meta name="application-name" content="Login y logout">
-        <meta name="description" content="Control de acceso e identificación de un usuario">
+        <meta name="application-name" content="New user">
+        <meta name="description" content="Registro de un nuevo usuario">
         <link href="../webroot/css/estiloejercicio.css" rel="stylesheet" type="text/css">
         <link rel="icon" href="../webroot/css/img/home.png" type="image/x-icon">
-        <title>Login Tema 5</title>
+        <title>Registro Tema 5</title>
         <style>
             form{
                 margin-top: 15px;
@@ -233,7 +233,7 @@ if($entradaOK){ //Si la entrada es correcta
                 <a href="../indexProyectoLoginLogoutTema5.php"><img src="../webroot/css/img/atras.png" class="imageatras" alt="IconoAtras" /></a>
                 <a href="https://github.com/AlbertoFRSauces/207DWESLoginLogoutTema5" target="_blank"><img src="../webroot/css/img/github.png" class="imagegithub" alt="IconoGitHub" /></a>
                 <p><a>&copy;</a><a href="http://daw207.ieslossauces.es/index.php">Alberto Fernández Ramírez</a> 29/09/2021 Todos los derechos reservados.</p>
-                <p>Ultima actualización: 06/12/2021 19:33 - Release 1.2</p>
+                <p>Ultima actualización: 06/12/2021 19:33 - Release 2.0</p>
             </footer>
         </div>
     </body>
