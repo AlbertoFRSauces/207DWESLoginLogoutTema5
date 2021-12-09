@@ -24,11 +24,13 @@ if (isset($_REQUEST['cambiarpassword'])) { //Si se ha pulsado cambiar password v
     exit;
 }
 
+require_once '../config/configAPP.php'; //Incluyo el array de idiomas para la COOKIE
 require_once '../core/libreriaValidacion.php'; //Incluyo la libreria de validacion
 require_once '../config/configDBPDO.php'; //Incluyo las variables de la conexion
 
 define("OBLIGATORIO", 1);//Variable obligatorio inicializada a 1
-$entradaOK = true;//Variable de entrada correcta inicializada a true
+$entradaOK = true; //Variable de entrada correcta inicializada a true
+$eliminar = false;
             
 $aErrores = [ //Creo el array de errores y lo inicializo a null
     'DescUsuario' => null
@@ -51,6 +53,10 @@ try { //Mostrar los datos del usuario actual en el formulario
     $oUsuario = $resultadoConsulta->fetchObject(); //Obtengo un objeto con el usuario
             
     $descripcionUsuarioActual = $oUsuario->T01_DescUsuario; //Almaceno la descripcion del usuario actual para mostrarla en el formulario de editar
+    $conexionesUsuarioActual = $oUsuario->T01_NumConexiones; //Almaceno el numero de conexiones del usuario actual para mostrarla en el formulario de editar
+    $fechaUltimaConexionActual  = $oUsuario->T01_FechaHoraUltimaConexion; //Almaceno la fechahora de la ultima conexion del usuario actual para mostrarla en el formulario de editar
+    $passwordActual  = $oUsuario->T01_Password; //Almaceno la password del usuario actual para mostrarla en el formulario de editar
+    $imagenUsuarioActual  = $oUsuario->T01_ImagenUsuario; //Almaceno la imagen del usuario actual para mostrarla en el formulario de editar
 }catch(PDOException $excepcion){//Codigo que se ejecuta si hay algun error
     $errorExcepcion = $excepcion->getCode();//Obtengo el codigo del error y lo almaceno en la variable errorException
     $mensajeException = $excepcion->getMessage();//Obtengo el mensaje del error y lo almaceno en la variable mensajeException
@@ -61,28 +67,30 @@ try { //Mostrar los datos del usuario actual en el formulario
 }
 
 if (isset($_REQUEST['eliminarcuenta'])) { //Si se ha pulsado eliminarcuenta elimino la cuenta del usuario actual
-    try {
-        $DB207DWESProyectoTema5 = new PDO(HOST, USER, PASSWORD);//Hago la conexion con la base de datos
-        $DB207DWESProyectoTema5 -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);// Establezco el atributo para la aparicion de errores con ATTR_ERRMODE y le pongo que cuando haya un error se lance una excepcion con ERRMODE_EXCEPTION
+    
+        try {
+            $DB207DWESProyectoTema5 = new PDO(HOST, USER, PASSWORD);//Hago la conexion con la base de datos
+            $DB207DWESProyectoTema5 -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);// Establezco el atributo para la aparicion de errores con ATTR_ERRMODE y le pongo que cuando haya un error se lance una excepcion con ERRMODE_EXCEPTION
 
-        $consulta = "DELETE FROM T01_Usuario WHERE T01_CodUsuario=:CodUsuario"; //Creo la consulta y le paso el usuario a la consulta
-        $resultadoConsulta=$DB207DWESProyectoTema5->prepare($consulta); // Preparo la consulta antes de ejecutarla
-        $aParametrosEliminar = [ //Array de parametros con el usuario de la sesion
-            ":CodUsuario" => $_SESSION['usuarioDAW207AppLoginLogout'] //El usuario de la sesion acutal
-        ];
-        $resultadoConsulta->execute($aParametrosEliminar);//Ejecuto la consulta con el array de parametrosEliminar para eliminar el usuario
+            $consulta = "DELETE FROM T01_Usuario WHERE T01_CodUsuario=:CodUsuario"; //Creo la consulta y le paso el usuario a la consulta
+            $resultadoConsulta=$DB207DWESProyectoTema5->prepare($consulta); // Preparo la consulta antes de ejecutarla
+            $aParametrosEliminar = [ //Array de parametros con el usuario de la sesion
+                ":CodUsuario" => $_SESSION['usuarioDAW207AppLoginLogout'] //El usuario de la sesion acutal
+            ];
+            $resultadoConsulta->execute($aParametrosEliminar);//Ejecuto la consulta con el array de parametrosEliminar para eliminar el usuario
 
-        session_destroy(); //Elimino todos los datos que contiene la sesion
-        header('Location: login.php'); //Redireccion al login de usuarios mediante header
-        exit;
-    }catch(PDOException $excepcion){//Codigo que se ejecuta si hay algun error
-        $errorExcepcion = $excepcion->getCode();//Obtengo el codigo del error y lo almaceno en la variable errorException
-        $mensajeException = $excepcion->getMessage();//Obtengo el mensaje del error y lo almaceno en la variable mensajeException
-        echo "<p style='color: red'>Codigo del error: </p>" . $errorExcepcion;//Muestro el codigo del error
-        echo "<p style='color: red'>Mensaje del error: </p>" . $mensajeException;//Muestro el mensaje del error
-    }finally{
-        unset($DB207DWESProyectoTema5);//Cierro la conexion
-    } 
+            session_destroy(); //Elimino todos los datos que contiene la sesion
+            header('Location: ../indexProyectoLoginLogoutTema5.php'); //Redireccion a el index mediante el header
+            exit;
+        }catch(PDOException $excepcion){//Codigo que se ejecuta si hay algun error
+            $errorExcepcion = $excepcion->getCode();//Obtengo el codigo del error y lo almaceno en la variable errorException
+            $mensajeException = $excepcion->getMessage();//Obtengo el mensaje del error y lo almaceno en la variable mensajeException
+            echo "<p style='color: red'>Codigo del error: </p>" . $errorExcepcion;//Muestro el codigo del error
+            echo "<p style='color: red'>Mensaje del error: </p>" . $mensajeException;//Muestro el mensaje del error
+        }finally{
+            unset($DB207DWESProyectoTema5);//Cierro la conexion
+        }
+    
 }
 
 //Comprobar si se ha pulsado el boton aceptar
@@ -174,12 +182,26 @@ if($entradaOK){ //Si la entrada es correcta
                 padding-bottom: 15px;
             }
             .errores{
-                height: 14px;
+                height: 8px;
             }
         </style>
+        <script>
+            //Funcion para mostrar un mensaje de confirmacion antes de eliminar el usuario
+            function confirmarEliminar(){
+                var respuesta = confirm("¿Estas seguro que quieres eliminar el usuario?");
+                if(respuesta == true){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        </script>
     </head>
     <body>
         <div class="container">
+            <header class="titulopagina">
+                <h1><?php  echo $aIdioma[$_COOKIE['idioma']]['editarusuario'] //Muestro editar usuario en el idioma selecionado en el index ?></h1>
+            </header>
             <form name="formulario" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" class="form">
                     <fieldset>
                         <p class="titulo">Editar Perfil de Usuario<p>
@@ -187,7 +209,7 @@ if($entradaOK){ //Si la entrada es correcta
                             <!--Campo Usuario OBLIGATORIO -->
                             <li>
                                 <div>
-                                    <label for="CodUsuario"><strong>Usuario*</strong></label>
+                                    <label for="CodUsuario"><strong>Usuario</strong></label>
                                     <input name="CodUsuario" id="CodUsuario" type="text" value="<?php 
                                     echo $_SESSION['usuarioDAW207AppLoginLogout'] ?>" readonly disabled>
                                 </div>
@@ -196,12 +218,45 @@ if($entradaOK){ //Si la entrada es correcta
                             <li>
                                 <div>
                                     <label for="DescUsuario"><strong>Descripcion*</strong></label>
-                                    <input name="DescUsuario" id="DescUsuario" type="text" value="<?php 
+                                    <input name="DescUsuario" id="DescUsuario2" type="text" value="<?php 
                                     echo isset($_REQUEST['DescUsuario']) ? $_REQUEST['DescUsuario'] : $descripcionUsuarioActual; ?>" 
                                     placeholder="Introduzca la descripcion">
                                     <?php echo '<p class="errores"><span>' . $aErrores['DescUsuario'] . '</span></p>' ?>
                                 </div>
                             </li>
+                            <!--Campo Numero Conexiones OBLIGATORIO-->
+                            <li>
+                                <div>
+                                    <label for="NumConexiones"><strong>Numero Conexiones</strong></label>
+                                    <input name="NumConexiones" id="NumConexiones2" type="text" value="<?php 
+                                    echo $conexionesUsuarioActual ?>" readonly disabled>
+                                </div>
+                            </li>
+                            <!--Campo Fecha Ultima Conexion OBLIGATORIO-->
+                            <li>
+                                <div>
+                                    <label for="FechaHoraUltimaConexion"><strong>Fecha Ultima Conexion</strong></label>
+                                    <input name="FechaHoraUltimaConexion" id="FechaHoraUltimaConexion2" type="text" value="<?php 
+                                    echo date('d/m/Y H:i:s',$fechaUltimaConexionActual) ?>" readonly disabled>
+                                </div>
+                            </li>
+                            <!--Campo Password OBLIGATORIO-->
+                            <li>
+                                <div>
+                                    <label for="Password"><strong>Password</strong></label>
+                                    <input name="Password" id="Password2" type="password" value="<?php 
+                                    echo $passwordActual ?>" readonly disabled>
+                                </div>
+                            </li>
+                            <!--Campo Imagen OBLIGATORIO-->
+                            <li>
+                                <div>
+                                    <label for="ImagenUsuario"><strong>Imagen</strong></label>
+                                    <input name="ImagenUsuario" id="ImagenUsuario2" type="text" value="<?php 
+                                    echo $imagenUsuarioActual ?>" readonly disabled>
+                                </div>
+                            </li>
+                            
                             <!--Campo Boton Cambiar Password-->
                             <li>
                                 <input type="submit" value="CAMBIAR PASSWORD" name="cambiarpassword" class="cambiarpassword"/>
@@ -211,9 +266,9 @@ if($entradaOK){ //Si la entrada es correcta
                             <li>
                                 <input type="submit" value="ACEPTAR" name="aceptar" class="aceptar"/>
                                 <input type="submit" value="CANCELAR" name="cancelar" class="cancelarperfil"/>
-                                <input type="submit" value="ELIMINAR CUENTA" name="eliminarcuenta" class="eliminarcuenta"/>
+                                <input type="submit" value="ELIMINAR USUARIO" name="eliminarcuenta" class="eliminarcuenta" onclick="return confirmarEliminar()"/>
+                                
                             </li>
-                            
                         </ul>
                     </fieldset>
                 </form>
@@ -224,7 +279,7 @@ if($entradaOK){ //Si la entrada es correcta
                 <a href="../indexProyectoLoginLogoutTema5.php"><img src="../webroot/css/img/atras.png" class="imageatras" alt="IconoAtras" /></a>
                 <a href="https://github.com/AlbertoFRSauces/207DWESLoginLogoutTema5" target="_blank"><img src="../webroot/css/img/github.png" class="imagegithub" alt="IconoGitHub" /></a>
                 <p><a>&copy;</a><a href="http://daw207.ieslossauces.es/index.php">Alberto Fernández Ramírez</a> 29/09/2021 Todos los derechos reservados.</p>
-                <p>Ultima actualización: 07/12/2021 19:33 - Release 2.0</p>
+                <p>Ultima actualización: 09/12/2021 20:18 - Release 2.1</p>
             </footer>
         </div>
     </body>

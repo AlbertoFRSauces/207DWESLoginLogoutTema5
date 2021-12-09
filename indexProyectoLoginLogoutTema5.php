@@ -7,6 +7,8 @@
  * Index para entrar al login o salir hacia el index del Tema 5
  */
 
+
+
 //Comprobar si se ha pulsado el boton salir
 if (isset($_REQUEST['salir'])) {
     header('Location: ../proyectoDWES/indexProyectoDWES.php');
@@ -28,23 +30,7 @@ if(isset($_REQUEST['idiomaBotonSeleccionado'])){
     setcookie("idioma", $_REQUEST['idiomaBotonSeleccionado'], time()+2000002);//Ponemos que el idioma sea el seleccionado en el boton
 }
 
-$aIdioma['es'] = [ //Array de los datos en español
-    'bienvenido' => 'Bienvenid@'
-];
-
-$aIdioma['en'] = [ //Array de los datos en ingles
-   'bienvenido' => 'Welcome'
-];
-
-$aIdioma['pt'] = [ //Array de los datos en ingles
-   'bienvenido' => 'Bem-vindo'
-];
-
-//$aIdiomas = array(
-//    'es' => array('bienvenido' => "Bienvenid@"),
-//    'en' => array('bienvenido' => "Welcome"),
-//    'pt' => array('bienvenido' => 'Receber')
-//);
+require_once 'config/configAPP.php'; //Incluyo el array de idiomas para la COOKIE
 
 ?>
 <!DOCTYPE html>
@@ -75,13 +61,20 @@ $aIdioma['pt'] = [ //Array de los datos en ingles
             </form>
             <form class="formularioIndex">
                 <input type="submit" value="Iniciar sesión" name="iniciarsesion" class="iniciarsesion"/>
+                <?php if(empty($_REQUEST['idiomaBotonSeleccionado'])){
+                    echo '<p class="idiomaseleccionado">Idioma seleccionado <img src="../207DWESLoginLogoutTema5/webroot/css/img/' . $_COOKIE['idioma'] . '.png" class="es" alt="imagenes"></p>';
+                }else{
+                    echo '<p class="idiomaseleccionado">Idioma seleccionado <img src="../207DWESLoginLogoutTema5/webroot/css/img/' . $_REQUEST['idiomaBotonSeleccionado'] . '.png" class="es" alt="imagenes"></p>';
+                }
+                
+                ?>
                 <input type="submit" value="SALIR" name="salir" class="salir"/>
             </form>
             <footer class="piepagina">
                 <a href="../proyectoDWES/indexProyectoDWES.php"><img src="../207DWESLoginLogoutTema5/webroot/css/img/atras.png" class="imageatras" alt="IconoAtras" /></a>
                 <a href="https://github.com/AlbertoFRSauces/207DWESLoginLogoutTema5" target="_blank"><img src="../207DWESLoginLogoutTema5/webroot/css/img/github.png" class="imagegithub" alt="IconoGitHub" /></a>
                 <p><a>&copy;</a><a href="http://daw207.ieslossauces.es/index.php">Alberto Fernández Ramírez</a> 29/09/2021 Todos los derechos reservados.</p>
-                <p>Ultima actualización: 04/12/2021 20:36 - Release 2.0</p>
+                <p>Ultima actualización: 09/12/2021 18:36 - Release 2.1</p>
             </footer>
         </div>
     </body>

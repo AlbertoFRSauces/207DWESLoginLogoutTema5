@@ -23,6 +23,15 @@ body{
     background-color:#EEEEEE;
     padding-bottom: 50px;
 }
+.titulopagina{
+    font-family: "Gotham-Medium";
+    font-size:22px;
+    text-align:center;
+    background-color:#252525;
+    color:white;
+    padding-top:15px;
+    padding-bottom:15px;
+}
 /* IMAGENES */
 .imagegithub{
     margin-right:5px;
@@ -366,7 +375,7 @@ td{
     color: #252525;
 }
 .eliminarcuenta{
-    width: 150px;
+    width: 160px;
     font-size: 100%;
     padding: 5px;
     margin: 3px;
@@ -379,6 +388,21 @@ td{
 .eliminarcuenta:hover{
     background-color: white;
     color: #252525;
+}
+#DescUsuario2{
+    width: 218px;
+}
+#NumConexiones2{
+    width: 168px;
+}
+#FechaHoraUltimaConexion2{
+    width: 151px;
+}
+#Password2{
+    width: 240px;
+}
+#ImagenUsuario2{
+    width: 254px;
 }
 
 /*CONTENIDO DEL CAMBIARPASSWORD.PHP CON DOS BOTONES*/
