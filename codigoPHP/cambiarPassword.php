@@ -19,6 +19,7 @@ if (isset($_REQUEST['cancelar'])) { //Si se ha pulsado cancelar vuelvo a editarP
     exit;
 }
 
+require_once '../config/configAPP.php'; //Incluyo el array de idiomas para la COOKIE
 require_once '../core/libreriaValidacion.php'; //Incluyo la libreria de validacion
 require_once '../config/configDBPDO.php'; //Incluyo las variables de la conexion
 
@@ -47,20 +48,19 @@ if (isset($_REQUEST['aceptar'])) { //Si le ha dado al boton de aceptar valido lo
         $DB207DWESProyectoTema5 = new PDO(HOST, USER, PASSWORD);//Hago la conexion con la base de datos
         $DB207DWESProyectoTema5 -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);// Establezco el atributo para la aparicion de errores con ATTR_ERRMODE y le pongo que cuando haya un error se lance una excepcion con ERRMODE_EXCEPTION
         
-        $consulta = "SELECT T01_Password FROM T01_Usuario WHERE T01_CodUsuario = :CodUsuario";
+        $consulta = "SELECT * FROM T01_Usuario WHERE T01_CodUsuario = :CodUsuario AND T01_Password = :Password ";
         $resultadoConsulta = $DB207DWESProyectoTema5->prepare($consulta); // Preparo la consulta antes de ejecutarla
         $aParametros = [ //Array de parametros para el update
-            ":CodUsuario" => $_SESSION['usuarioDAW207AppLoginLogout'] //El usuario de la sesion actual
+            ":CodUsuario" => $_SESSION['usuarioDAW207AppLoginLogout'], //El usuario de la sesion actual
+            ":Password" => hash("sha256", ($_SESSION['usuarioDAW207AppLoginLogout'] . $_REQUEST['PasswordActual'])) //Encripto la password introducida en el formulario
         ];
         $resultadoConsulta->execute($aParametros);//Ejecuto la consulta con el array de parametros para actualizar la descripcion del usuaro en la DB
         $oUsuario = $resultadoConsulta->fetchObject(); //Obtengo un objeto del primer registro
         
-        $passwordActualDB = $oUsuario->T01_Password; //Obtengo la password encriptada de la DB
-        $passwordActualFormulario = hash("sha256", ($_SESSION['usuarioDAW207AppLoginLogout'] . $_REQUEST['PasswordActual'])); //Encripto la password introducida en el formulario
-        if($passwordActualDB != $passwordActualFormulario){ //Compruebo si la password de la DB es igual a la pasada en el formulario
-            $aErrores['PasswordActual'] = "Password incorrecta!";
-        }
-        
+        if($resultadoConsulta->rowCount() == 0){ //Si la consulta no tiene ningun registro es que no esta bien el usuario o la password
+                $aErrores['PasswordActual'] = "Password incorrecta!"; //Si no es correcta, almaceno el error en el array de errores
+            }
+
         if($_REQUEST['PasswordNueva'] != $_REQUEST['RepetirPasswordNueva']){ //Compruebo si la password nueva coincide con la password nueva repetida
             $aErrores['PasswordNueva'] = "Las passwords no coinciden!";
             $aErrores['RepetirPasswordNueva'] = "Las passwords no coinciden!";
@@ -165,6 +165,9 @@ if($entradaOK){ //Si la entrada es correcta
     </head>
     <body>
         <div class="container">
+            <header class="titulopagina">
+                <h1><?php  echo $aIdioma[$_COOKIE['idioma']]['cambiarpassword'] //Muestro cambiar password en el idioma selecionado en el index ?></h1>
+            </header>
             <form name="formulario" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" class="form">
                     <fieldset>
                         <p class="titulo">Cambiar Contraseña<p>
@@ -215,7 +218,7 @@ if($entradaOK){ //Si la entrada es correcta
                 <a href="../indexProyectoLoginLogoutTema5.php"><img src="../webroot/css/img/atras.png" class="imageatras" alt="IconoAtras" /></a>
                 <a href="https://github.com/AlbertoFRSauces/207DWESLoginLogoutTema5" target="_blank"><img src="../webroot/css/img/github.png" class="imagegithub" alt="IconoGitHub" /></a>
                 <p><a>&copy;</a><a href="http://daw207.ieslossauces.es/index.php">Alberto Fernández Ramírez</a> 29/09/2021 Todos los derechos reservados.</p>
-                <p>Ultima actualización: 07/12/2021 23:25 - Release 2.0</p>
+                <p>Ultima actualización: 09/12/2021 18:47 - Release 2.1</p>
             </footer>
         </div>
     </body>

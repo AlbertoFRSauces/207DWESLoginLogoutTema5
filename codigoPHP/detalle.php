@@ -19,6 +19,8 @@ if (isset($_REQUEST['volver'])) {
     header('Location: ../codigoPHP/programa.php');
     exit;
 }
+
+require_once '../config/configAPP.php'; //Incluyo el array de idiomas para la COOKIE
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -35,12 +37,15 @@ if (isset($_REQUEST['volver'])) {
     </head>
     <body>
         <div class="container">
+            <header class="titulopagina">
+                <h1><?php  echo $aIdioma[$_COOKIE['idioma']]['detalle'] //Muestro detalle en el idioma selecionado en el index ?></h1>
+            </header>
             <form class="buttonback">
                 <input type="submit" value="Volver" name="volver" class="volver"/>
             </form>
             <!–– Muestra del contenido de la variable $_SESSION con foreach()––>
             <?php if(!empty($_SESSION)){?>
-                <h2>Mostrar $_SESSION con foreach()</h2>
+                <h2>$_SESSION</h2>
                 <table class="tablavariable"><tr><th class="cajas">Clave</th><th class="cajas">Valor</th></tr>
                 <?php foreach ($_SESSION as $clave => $valor){?>
                     <tr>
@@ -58,7 +63,7 @@ if (isset($_REQUEST['volver'])) {
                 
             <!–– Muestra del contenido de la variable $_COOKIE con foreach()––>
             <?php if(!empty($_COOKIE)){?>
-                <h2>Mostrar $_COOKIE con foreach()</h2>
+                <h2>$_COOKIE</h2>
                 <table class="tablavariable"><tr><th class="cajas">Clave</th><th class="cajas">Valor</th></tr>
                 <?php foreach ($_COOKIE as $clave => $valor){?>
                     <tr>
@@ -76,7 +81,7 @@ if (isset($_REQUEST['volver'])) {
                 
             <!–– Muestra del contenido de la variable $_SERVER con foreach()––>
             <?php if(!empty($_SERVER)){?>
-                <h2>Mostrar $_SERVER con foreach()</h2>
+                <h2>$_SERVER</h2>
                 <table class="tablavariable"><tr><th class="cajas">Clave</th><th class="cajas">Valor</th></tr>
                 <?php foreach ($_SERVER as $clave => $valor){?>
                     <tr>
@@ -95,7 +100,7 @@ if (isset($_REQUEST['volver'])) {
                 <a href="../codigoPHP/programa.php"><img src="../webroot/css/img/atras.png" class="imageatras" alt="IconoAtras" /></a>
                 <a href="https://github.com/AlbertoFRSauces/207DWESLoginLogoutTema5" target="_blank"><img src="../webroot/css/img/github.png" class="imagegithub" alt="IconoGitHub" /></a>
                 <p><a>&copy;</a><a href="http://daw207.ieslossauces.es/index.php">Alberto Fernández Ramírez</a> 29/09/2021 Todos los derechos reservados.</p>
-                <p>Ultima actualización: 01/12/2021 20:06 - Release 2.0</p>
+                <p>Ultima actualización: 09/12/2021 18:00 - Release 2.1</p>
             </footer>
         </div>
     </body>

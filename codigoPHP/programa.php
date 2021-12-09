@@ -30,18 +30,7 @@ if (isset($_REQUEST['detalle'])) { //Comprobar si se ha pulsado el boton detalle
     exit;
 }
 
-$aIdioma['es'] = [ //Array de los datos en español
-    'bienvenido' => 'Bienvenid@'
-];
-
-$aIdioma['en'] = [ //Array de los datos en ingles
-   'bienvenido' => 'Welcome'
-];
-
-$aIdioma['pt'] = [ //Array de los datos en ingles
-   'bienvenido' => 'Bem-vindo'
-];
-
+require_once '../config/configAPP.php'; //Incluyo el array de idiomas para la COOKIE
 require_once '../core/libreriaValidacion.php'; //Incluyo la libreria de validacion
 require_once '../config/configDBPDO.php'; //Incluyo las variables de la conexion
 
@@ -60,7 +49,7 @@ try{
     $nombreUsuario = $oUsuario->T01_DescUsuario; //Guardo en la variable nombreUsuario el nombre del usuario logeado con exito
     $conexionesUsuario = $oUsuario->T01_NumConexiones; //Guardo en la variable conexionesUsuario el total de conexiones realizadas del usuario logeado con exito
     
-    $ultimaConexionUsuario = $_SESSION['fechaHoraUltimaConexionAnteriorDAW207AppLoginLogout']; //Guardo en la variable ultimaConexionUsuario la fecha de la ultima conexion del usuario logeado con exito
+    $ultimaConexionUsuario = $_SESSION['fechaHoraUltimaConexionAnterior']; //Guardo en la variable ultimaConexionUsuario la fecha de la ultima conexion del usuario logeado con exito
     
 }catch(PDOException $excepcion){//Codigo que se ejecuta si hay algun error
     $errorExcepcion = $excepcion->getCode();//Obtengo el codigo del error y lo almaceno en la variable errorException
@@ -86,6 +75,9 @@ try{
     </head>
     <body>
         <div class="container">
+            <header class="titulopagina">
+                <h1><?php  echo $aIdioma[$_COOKIE['idioma']]['programa'] //Muestro programa en el idioma selecionado en el index ?></h1>
+            </header>
             <?php //Si el usuario nunca se ha conectado muestro el siguiente mensaje
             if($conexionesUsuario <= 1){?>
                 <h1 class="usuario"><?php  echo $aIdioma[$_COOKIE['idioma']]['bienvenido'] . " " . $nombreUsuario //Muestro la bienvenida en el idioma selecionado en el index ?></h1>
@@ -109,7 +101,7 @@ try{
                 <a href="../codigoPHP/login.php"><img src="../webroot/css/img/atras.png" class="imageatras" alt="IconoAtras" /></a>
                 <a href="https://github.com/AlbertoFRSauces/207DWESLoginLogoutTema5" target="_blank"><img src="../webroot/css/img/github.png" class="imagegithub" alt="IconoGitHub" /></a>
                 <p><a>&copy;</a><a href="http://daw207.ieslossauces.es/index.php">Alberto Fernández Ramírez</a> 29/09/2021 Todos los derechos reservados.</p>
-                <p>Ultima actualización: 06/12/2021 17:40 - Release 2.0</p>
+                <p>Ultima actualización: 09/12/2021 18:37 - Release 2.1</p>
             </footer>
         </div>
     </body>

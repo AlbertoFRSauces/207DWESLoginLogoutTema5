@@ -17,6 +17,7 @@ if (isset($_REQUEST['registrarse'])) { //Si se ha pulsado entro en registrarme
     exit;
 }
 
+require_once '../config/configAPP.php'; //Incluyo el array de idiomas para la COOKIE
 require_once '../core/libreriaValidacion.php'; //Incluyo la libreria de validacion
 require_once '../config/configDBPDO.php'; //Incluyo las variables de la conexion
 
@@ -42,7 +43,7 @@ if (isset($_REQUEST['entrar'])) { //Si le ha dado al boton de enviar valido los 
             $DB207DWESProyectoTema5 = new PDO(HOST, USER, PASSWORD);//Hago la conexion con la base de datos
             $DB207DWESProyectoTema5 -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);// Establezco el atributo para la aparicion de errores con ATTR_ERRMODE y le pongo que cuando haya un error se lance una excepcion con ERRMODE_EXCEPTION
 
-            $consulta = "SELECT T01_NumConexiones, T01_FechaHoraUltimaConexion FROM T01_Usuario WHERE T01_CodUsuario=:CodUsuario AND T01_Password=:Password"; //Creo la consulta y le paso el usuario a la consulta
+            $consulta = "SELECT T01_FechaHoraUltimaConexion FROM T01_Usuario WHERE T01_CodUsuario=:CodUsuario AND T01_Password=:Password"; //Creo la consulta y le paso el usuario a la consulta
             $resultadoConsulta=$DB207DWESProyectoTema5->prepare($consulta); // Preparo la consulta antes de ejecutarla
             $aParametros1 = [
                 ":CodUsuario" => $_REQUEST['CodUsuario'],
@@ -83,14 +84,12 @@ if($entradaOK){ //Si la entrada es correcta
         $DB207DWESProyectoTema5 = new PDO(HOST, USER, PASSWORD);//Hago la conexion con la base de datos
         $DB207DWESProyectoTema5 -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);// Establezco el atributo para la aparicion de errores con ATTR_ERRMODE y le pongo que cuando haya un error se lance una excepcion con ERRMODE_EXCEPTION
         
-        $numeroConexiones = $oUsuario->T01_NumConexiones; //Guardo el numero de conexiones que tiene la base de datos en una variable
         $ultimaConexion = $oUsuario->T01_FechaHoraUltimaConexion; //Guardo la fechahora de la ultima conexion que tiene la base de datos en una variable
         
-        $consultaUpdate = "UPDATE T01_Usuario SET T01_NumConexiones=:NumConexiones, T01_FechaHoraUltimaConexion=:FechaHoraUltimaConexion WHERE T01_CodUsuario=:CodUsuario"; //Consulta para actualizar el total de conexiones y la fechahora de la ultima conexion
+        $consultaUpdate = "UPDATE T01_Usuario SET T01_NumConexiones=T01_NumConexiones+1, T01_FechaHoraUltimaConexion=:FechaHoraUltimaConexion WHERE T01_CodUsuario=:CodUsuario"; //Consulta para actualizar el total de conexiones y la fechahora de la ultima conexion
         $resultadoConsultaUpdate = $DB207DWESProyectoTema5->prepare($consultaUpdate); // Preparo la consulta antes de ejecutarla
         
         $aParametros2 = [ //Array de parametros para el update
-            ":NumConexiones" => ($numeroConexiones+1), //Le sumo al total de conexiones una mas para contar la actual
             ":FechaHoraUltimaConexion" => time(), //Asigno hora local actual con una marca temporal usando time()
             ":CodUsuario" => $_REQUEST['CodUsuario'] //El usuario pasado en el formulario
         ];
@@ -98,7 +97,7 @@ if($entradaOK){ //Si la entrada es correcta
         
         session_start(); //Creo una nueva sesion o recupero una existente
         $_SESSION['usuarioDAW207AppLoginLogout'] = $_REQUEST['CodUsuario']; //Almaceno el usuario en $_SESSION
-        $_SESSION['fechaHoraUltimaConexionAnteriorDAW207AppLoginLogout'] = $ultimaConexion; //Almaceno la ultima conexion en $_SESSION
+        $_SESSION['fechaHoraUltimaConexionAnterior'] = $ultimaConexion; //Almaceno la ultima conexion en $_SESSION
 
         header('Location: programa.php'); //Mando al usuario a la pagina programa.php
         exit;
@@ -170,6 +169,9 @@ if($entradaOK){ //Si la entrada es correcta
     </head>
     <body>
         <div class="container">
+            <header class="titulopagina">
+                <h1><?php  echo $aIdioma[$_COOKIE['idioma']]['iniciarsesion'] //Muestro iniciar sesion en el idioma selecionado en el index ?></h1>
+            </header>
             <form name="formulario" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" class="form">
                     <fieldset>
                         <p class="titulo">Iniciar sesión<p>
@@ -210,7 +212,7 @@ if($entradaOK){ //Si la entrada es correcta
                 <a href="../indexProyectoLoginLogoutTema5.php"><img src="../webroot/css/img/atras.png" class="imageatras" alt="IconoAtras" /></a>
                 <a href="https://github.com/AlbertoFRSauces/207DWESLoginLogoutTema5" target="_blank"><img src="../webroot/css/img/github.png" class="imagegithub" alt="IconoGitHub" /></a>
                 <p><a>&copy;</a><a href="http://daw207.ieslossauces.es/index.php">Alberto Fernández Ramírez</a> 29/09/2021 Todos los derechos reservados.</p>
-                <p>Ultima actualización: 04/12/2021 20:33 - Release 2.0</p>
+                <p>Ultima actualización: 09/12/2021 18:37 - Release 2.1</p>
             </footer>
         </div>
     </body>

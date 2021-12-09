@@ -8,10 +8,11 @@
  */
 //Comprobar si se ha pulsado el boton volver
 if (isset($_REQUEST['cancelar'])) { //Si se ha pulsado vuelvo a el index de la web
-    header('Location: login.php'); //Redireccion a el index mediante el header
+    header('Location: ../indexProyectoLoginLogoutTema5.php'); //Redireccion a el index mediante el header
     exit;
 }
 
+require_once '../config/configAPP.php'; //Incluyo el array de idiomas para la COOKIE
 require_once '../core/libreriaValidacion.php'; //Incluyo la libreria de validacion
 require_once '../config/configDBPDO.php'; //Incluyo las variables de la conexion
 
@@ -104,7 +105,7 @@ if($entradaOK){ //Si la entrada es correcta
         
         session_start(); //Creo una nueva sesion o recupero una existente
         $_SESSION['usuarioDAW207AppLoginLogout'] = $_REQUEST['CodUsuario']; //Almaceno el usuario en $_SESSION
-        $_SESSION['fechaHoraUltimaConexionAnteriorDAW207AppLoginLogout'] = null; //Almaceno la ultima conexion en $_SESSION, en este caso es null ya que es un usuario nuevo
+        $_SESSION['fechaHoraUltimaConexionAnterior'] = null; //Almaceno la ultima conexion en $_SESSION, en este caso es null ya que es un usuario nuevo
 
         header('Location: programa.php'); //Mando al usuario a la pagina programa.php
         exit;
@@ -173,6 +174,9 @@ if($entradaOK){ //Si la entrada es correcta
     </head>
     <body>
         <div class="container">
+            <header class="titulopagina">
+                <h1><?php  echo $aIdioma[$_COOKIE['idioma']]['crearusuario'] //Muestro crear usuario en el idioma selecionado en el index ?></h1>
+            </header>
             <form name="formulario" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" class="form">
                     <fieldset>
                         <p class="titulo">Registro nuevo usuario<p>
@@ -220,7 +224,7 @@ if($entradaOK){ //Si la entrada es correcta
                             
                             <!--Campo Botones Crear y Cancelar-->
                             <li>
-                                <input type="submit" value="CREAR" name="crear" class="crear"/>
+                                <input type="submit" value="REGÍSTRATE" name="crear" class="crear"/>
                                 <input type="submit" value="CANCELAR" name="cancelar" class="cancelar"/>
                             </li>
                         </ul>
@@ -233,7 +237,7 @@ if($entradaOK){ //Si la entrada es correcta
                 <a href="../indexProyectoLoginLogoutTema5.php"><img src="../webroot/css/img/atras.png" class="imageatras" alt="IconoAtras" /></a>
                 <a href="https://github.com/AlbertoFRSauces/207DWESLoginLogoutTema5" target="_blank"><img src="../webroot/css/img/github.png" class="imagegithub" alt="IconoGitHub" /></a>
                 <p><a>&copy;</a><a href="http://daw207.ieslossauces.es/index.php">Alberto Fernández Ramírez</a> 29/09/2021 Todos los derechos reservados.</p>
-                <p>Ultima actualización: 06/12/2021 19:33 - Release 2.0</p>
+                <p>Ultima actualización: 09/12/2021 20:21 - Release 2.1</p>
             </footer>
         </div>
     </body>
