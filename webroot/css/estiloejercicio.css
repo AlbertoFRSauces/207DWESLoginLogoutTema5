@@ -25,12 +25,23 @@ body{
 }
 .titulopagina{
     font-family: "Gotham-Medium";
-    font-size:22px;
+    font-size:17px;
     text-align:center;
     background-color:#252525;
     color:white;
     padding-top:15px;
     padding-bottom:15px;
+    text-transform:uppercase;
+}
+.tituloaplicacion{
+    font-family: "Gotham-Medium";
+    font-size:19px;
+    text-align:center;
+    background-color:#D90000;
+    color:white;
+    padding-top:15px;
+    padding-bottom:15px;
+    text-transform:uppercase;
 }
 /* IMAGENES */
 .imagegithub{

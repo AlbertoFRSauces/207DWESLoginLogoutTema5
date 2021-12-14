@@ -199,9 +199,12 @@ if($entradaOK){ //Si la entrada es correcta
     </head>
     <body>
         <div class="container">
-            <header class="titulopagina">
-                <h1><?php  echo $aIdioma[$_COOKIE['idioma']]['editarusuario'] //Muestro editar usuario en el idioma selecionado en el index ?></h1>
+            <header class="tituloaplicacion">
+                <h1>207DWESLoginLogoutTema5</h1>
             </header>
+            <article class="titulopagina">
+                <h2><?php  echo $aIdioma[$_COOKIE['idioma']]['editarusuario'] //Muestro editar usuario en el idioma selecionado en el index ?></h2>
+            </article>
             <form name="formulario" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" class="form">
                     <fieldset>
                         <p class="titulo">Editar Perfil de Usuario<p>
@@ -279,7 +282,7 @@ if($entradaOK){ //Si la entrada es correcta
                 <a href="../indexProyectoLoginLogoutTema5.php"><img src="../webroot/css/img/atras.png" class="imageatras" alt="IconoAtras" /></a>
                 <a href="https://github.com/AlbertoFRSauces/207DWESLoginLogoutTema5" target="_blank"><img src="../webroot/css/img/github.png" class="imagegithub" alt="IconoGitHub" /></a>
                 <p><a>&copy;</a><a href="http://daw207.ieslossauces.es/index.php">Alberto Fernández Ramírez</a> 29/09/2021 Todos los derechos reservados.</p>
-                <p>Ultima actualización: 09/12/2021 20:18 - Release 2.1</p>
+                <p>Ultima actualización: 14/12/2021 17:27 - Release 2.2</p>
             </footer>
         </div>
     </body>

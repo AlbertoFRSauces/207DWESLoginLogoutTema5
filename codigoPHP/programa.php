@@ -75,9 +75,12 @@ try{
     </head>
     <body>
         <div class="container">
-            <header class="titulopagina">
-                <h1><?php  echo $aIdioma[$_COOKIE['idioma']]['programa'] //Muestro programa en el idioma selecionado en el index ?></h1>
+            <header class="tituloaplicacion">
+                <h1>207DWESLoginLogoutTema5</h1>
             </header>
+            <article class="titulopagina">
+                <h2><?php  echo $aIdioma[$_COOKIE['idioma']]['programa'] //Muestro programa en el idioma selecionado en el index ?></h2>
+            </article>
             <?php //Si el usuario nunca se ha conectado muestro el siguiente mensaje
             if($conexionesUsuario <= 1){?>
                 <h1 class="usuario"><?php  echo $aIdioma[$_COOKIE['idioma']]['bienvenido'] . " " . $nombreUsuario //Muestro la bienvenida en el idioma selecionado en el index ?></h1>
@@ -101,7 +104,7 @@ try{
                 <a href="../codigoPHP/login.php"><img src="../webroot/css/img/atras.png" class="imageatras" alt="IconoAtras" /></a>
                 <a href="https://github.com/AlbertoFRSauces/207DWESLoginLogoutTema5" target="_blank"><img src="../webroot/css/img/github.png" class="imagegithub" alt="IconoGitHub" /></a>
                 <p><a>&copy;</a><a href="http://daw207.ieslossauces.es/index.php">Alberto Fernández Ramírez</a> 29/09/2021 Todos los derechos reservados.</p>
-                <p>Ultima actualización: 09/12/2021 18:37 - Release 2.1</p>
+                <p>Ultima actualización: 14/12/2021 17:27 - Release 2.2</p>
             </footer>
         </div>
     </body>

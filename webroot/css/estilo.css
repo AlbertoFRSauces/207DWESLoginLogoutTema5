@@ -25,19 +25,30 @@ body{
     background-color:#EEEEEE;
 }
 /* INICIO Titulo*/
-header h1{
+.titulopagina{
     font-family: "Gotham-Medium";
-    font-size:42px;
-    text-transform:uppercase;
-    text-align: center;
-    color:white;
-    padding-left:15px;
-    padding-top:25px;
-    padding-bottom:25px;
-    padding-right:15px;
+    font-size:19px;
+    text-align:center;
     background-color:#D90000;
+    color:white;
+    padding-top:15px;
+    padding-bottom:15px;
+    text-transform:uppercase;
 }
 /* FIN Titulo */
+
+/* INICIO subtitulo */
+.segundot{
+    font-family: "Gotham-Medium";
+    font-size:17px;
+    text-transform:uppercase;
+    text-align:center;
+    background-color:#252525;
+    color:white;
+    padding-top:15px;
+    padding-bottom:15px;
+}
+/* FIN subtitulo */
 
 /* IMAGENES */
 .imagegithub{
@@ -80,18 +91,6 @@ header h1{
     opacity: 0;
 }
 /* FIN IMAGENES */
-
-/* INICIO subtitulo */
-.segundot{
-    font-family: "Gotham-Medium";
-    font-size:19px;
-    text-align:center;
-    background-color:#252525;
-    color:white;
-    padding-top:15px;
-    padding-bottom:15px;
-}
-/* FIN subtitulo */
 
 /* INICIO Cuadros sobre las practicas realizadas */
 .tituloPDO{
@@ -190,6 +189,7 @@ table{
     height: auto;
     width: 100%;
 }
+
 .formularioIndex{
     width: 700px;
     height: auto;

@@ -37,9 +37,12 @@ require_once '../config/configAPP.php'; //Incluyo el array de idiomas para la CO
     </head>
     <body>
         <div class="container">
-            <header class="titulopagina">
-                <h1><?php  echo $aIdioma[$_COOKIE['idioma']]['detalle'] //Muestro detalle en el idioma selecionado en el index ?></h1>
+            <header class="tituloaplicacion">
+                <h1>207DWESLoginLogoutTema5</h1>
             </header>
+            <article class="titulopagina">
+                <h2><?php  echo $aIdioma[$_COOKIE['idioma']]['detalle'] //Muestro detalle en el idioma selecionado en el index ?></h2>
+            </article>
             <form class="buttonback">
                 <input type="submit" value="Volver" name="volver" class="volver"/>
             </form>
@@ -100,7 +103,7 @@ require_once '../config/configAPP.php'; //Incluyo el array de idiomas para la CO
                 <a href="../codigoPHP/programa.php"><img src="../webroot/css/img/atras.png" class="imageatras" alt="IconoAtras" /></a>
                 <a href="https://github.com/AlbertoFRSauces/207DWESLoginLogoutTema5" target="_blank"><img src="../webroot/css/img/github.png" class="imagegithub" alt="IconoGitHub" /></a>
                 <p><a>&copy;</a><a href="http://daw207.ieslossauces.es/index.php">Alberto Fernández Ramírez</a> 29/09/2021 Todos los derechos reservados.</p>
-                <p>Ultima actualización: 09/12/2021 18:00 - Release 2.1</p>
+                <p>Ultima actualización: 14/12/2021 17:27 - Release 2.2</p>
             </footer>
         </div>
     </body>
