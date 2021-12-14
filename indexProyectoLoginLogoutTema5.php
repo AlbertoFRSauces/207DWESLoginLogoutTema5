@@ -48,7 +48,7 @@ require_once 'config/configAPP.php'; //Incluyo el array de idiomas para la COOKI
     </head>
     <body>
         <div class="containerIndex">
-            <header>
+            <header class="titulopagina">
                 <h1>207DWESLoginLogoutTema5</h1>
             </header>
             <article class="segundot">
@@ -74,7 +74,7 @@ require_once 'config/configAPP.php'; //Incluyo el array de idiomas para la COOKI
                 <a href="../proyectoDWES/indexProyectoDWES.php"><img src="../207DWESLoginLogoutTema5/webroot/css/img/atras.png" class="imageatras" alt="IconoAtras" /></a>
                 <a href="https://github.com/AlbertoFRSauces/207DWESLoginLogoutTema5" target="_blank"><img src="../207DWESLoginLogoutTema5/webroot/css/img/github.png" class="imagegithub" alt="IconoGitHub" /></a>
                 <p><a>&copy;</a><a href="http://daw207.ieslossauces.es/index.php">Alberto Fernández Ramírez</a> 29/09/2021 Todos los derechos reservados.</p>
-                <p>Ultima actualización: 09/12/2021 18:36 - Release 2.1</p>
+                <p>Ultima actualización: 14/12/2021 17:27 - Release 2.2</p>
             </footer>
         </div>
     </body>
